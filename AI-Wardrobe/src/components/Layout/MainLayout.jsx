@@ -4,18 +4,19 @@ import {
   HomeO, 
   Search, 
   ChatO, 
-  StarO, 
-  UserO 
+  UserO,
+  BagO,
 } from '@react-vant/icons';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import styles from './mainlayout.module.css';
 
-// 底部导航配置
+
+// 底部导航配置 - 移除收藏导航
 const tabs = [
   { icon: <HomeO />, title: '首页', path: '/home' },
+  { icon: <BagO  />, title: '衣柜', path: '/wardrobe' },
   { icon: <Search />, title: '发现', path: '/discover' },
   { icon: <ChatO />, title: '消息', path: '/messages' },
-  { icon: <StarO />, title: '收藏', path: '/favorites' },
   { icon: <UserO />, title: '我的', path: '/profile' }
 ];
 

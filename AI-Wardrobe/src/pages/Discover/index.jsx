@@ -1,12 +1,6 @@
 import { useState } from 'react';
+import styles from './discover.module.css';
 import {
-  Tabs,
-  Card,
-  Image,
-  Tag,
-  Button,
-  Space,
-  Grid,
   Search
 } from 'react-vant';
 import {
@@ -65,115 +59,94 @@ const Discover = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className={styles.container}>
       {/* 顶部搜索和标题 */}
-      <div className="bg-white px-4 py-3 shadow-sm">
-        <div className="flex items-center justify-between mb-3">
-          <h1 className="text-xl font-bold text-gray-800">发现</h1>
+      <div className={styles.header}>
+        <div className={styles.headerTop}>
+          <h1 className={styles.title}>发现</h1>
         </div>
-        <Search
-          value={searchValue}
-          onChange={setSearchValue}
-          placeholder="搜索穿搭灵感、时尚资讯..."
-          shape="round"
-          leftIcon={<SearchIcon />}
-          className="bg-gray-100"
-        />
+        <div className={styles.searchContainer}>
+          <Search
+            value={searchValue}
+            onChange={setSearchValue}
+            placeholder="搜索穿搭灵感、时尚资讯..."
+            shape="round"
+            leftIcon={<SearchIcon className={styles.searchIcon} />}
+            className={styles.searchInput}
+          />
+        </div>
       </div>
 
       {/* 分类标签 */}
-      <div className="bg-white px-4 py-3 border-b border-gray-100">
-        <Tabs
-          active={activeTab}
-          onChange={setActiveTab}
-          type="card"
-          className="discover-tabs"
-        >
+      <div className={styles.categoryTabs}>
+        <div className={styles.tabsContainer}>
           {categories.map((category, index) => (
-            <Tabs.TabPane key={index} title={category} />
+            <button
+              key={index}
+              className={`${styles.categoryTab} ${activeTab === index ? styles.active : ''}`}
+              onClick={() => setActiveTab(index)}
+            >
+              {category}
+            </button>
           ))}
-        </Tabs>
+        </div>
       </div>
 
       {/* 内容列表 */}
-      <div className="px-4 py-4">
-        <Space direction="vertical" size={16} className="w-full">
+      <div className={styles.content}>
+        <div className={styles.contentGrid}>
           {contentData.map((item) => (
-            <Card key={item.id} className="rounded-xl shadow-sm overflow-hidden">
-              {/* 作者信息 */}
-              <div className="flex items-center p-4 pb-3">
-                <Image
-                  src={item.avatar}
-                  className="w-10 h-10 rounded-full mr-3"
-                  fit="cover"
-                />
-                <div className="flex-1">
-                  <h4 className="font-medium text-gray-800">{item.author}</h4>
-                  <p className="text-xs text-gray-500">2小时前</p>
-                </div>
-                <Button size="small" type="primary" plain>
-                  关注
-                </Button>
+            <div key={item.id} className={styles.contentCard}>
+              {/* 图片 */}
+              <div className={styles.contentImage}>
+                <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                <div className={styles.authorInfo}>{item.author}</div>
               </div>
 
-              {/* 内容 */}
-              <div className="px-4 pb-3">
-                <h3 className="font-semibold text-gray-800 mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed mb-3">
-                  {item.content}
-                </p>
+              {/* 内容信息 */}
+              <div className={styles.contentInfo}>
+                <h3 className={styles.contentTitle}>{item.title}</h3>
+                <p className={styles.contentDesc}>{item.content}</p>
 
                 {/* 标签 */}
-                <div className="flex flex-wrap gap-2 mb-3">
+                <div className={styles.contentTags}>
                   {item.tags.map((tag, index) => (
-                    <Tag key={index} type="primary" plain size="small">
+                    <span key={index} className={`${styles.contentTag} ${tag === '夏装' ? styles.summer : tag === '清爽' ? styles.fresh : tag === '休闲' ? styles.casual : tag === '职场' ? styles.office : ''}`}>
                       #{tag}
-                    </Tag>
+                    </span>
                   ))}
                 </div>
-              </div>
 
-              {/* 图片 */}
-              <div className="px-4 pb-3">
-                <Image
-                  src={item.image}
-                  className="w-full h-48 rounded-lg object-cover"
-                  fit="cover"
-                />
-              </div>
-
-              {/* 互动按钮 */}
-              <div className="flex items-center justify-between px-4 py-3 border-t border-gray-100">
-                <div className="flex items-center space-x-6">
-                  <div className="flex items-center space-x-1">
-                    <LikeO className="text-gray-500" />
-                    <span className="text-sm text-gray-600">{item.likes}</span>
+                {/* 互动按钮 */}
+                <div className={styles.actionBar}>
+                  <div className={styles.actionLeft}>
+                    <div className={styles.actionItem}>
+                      <LikeO className={styles.actionIcon} />
+                      <span>{item.likes}</span>
+                    </div>
+                    <div className={styles.actionItem}>
+                      <ChatO className={styles.actionIcon} />
+                      <span>{item.comments}</span>
+                    </div>
+                    <div className={styles.actionItem}>
+                      <EyeO className={styles.actionIcon} />
+                      <span>{item.views}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-1">
-                    <ChatO className="text-gray-500" />
-                    <span className="text-sm text-gray-600">{item.comments}</span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <EyeO className="text-gray-500" />
-                    <span className="text-sm text-gray-600">{item.views}</span>
-                  </div>
+                  <button className={styles.followButton}>关注</button>
                 </div>
-                <ShareO className="text-gray-500" />
               </div>
-            </Card>
+            </div>
           ))}
-        </Space>
+        </div>
       </div>
 
       {/* 加载更多 */}
-      <div className="px-4 py-4 text-center">
-        <Button type="primary" plain block>
+      <div className={styles.loadMore}>
+        <button className={styles.loadMoreButton}>
           加载更多内容
-        </Button>
+        </button>
       </div>
-
-      {/* 底部间距 */}
-      <div className="h-4"></div>
     </div>
   );
 };

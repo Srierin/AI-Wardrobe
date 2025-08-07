@@ -1,15 +1,6 @@
 import { useState } from 'react';
-import { 
-  Tabs, 
-  Card, 
-  Image, 
-  Tag, 
-  Button,
-  Space,
-  Grid,
-  Empty
-} from 'react-vant';
-import { 
+import styles from './favorites.module.css';
+import {
   LikeO,
   StarO,
   ShareO,
@@ -98,144 +89,163 @@ const Favorites = () => {
   ];
 
   const renderOutfitCard = (outfit) => (
-    <Card key={outfit.id} className="rounded-xl shadow-sm overflow-hidden mb-4">
+    <div key={outfit.id} className={`${styles.outfitCard} mb-4`}>
       <div className="relative">
-        <Image
+        <img
           src={outfit.image}
-          className="w-full h-64 object-cover"
-          fit="cover"
+          className={styles.outfitImage}
+          alt={outfit.title}
         />
         <div className="absolute top-3 right-3">
           <StarO className="text-yellow-500 bg-white bg-opacity-80 rounded-full p-1" />
         </div>
         <div className="absolute bottom-3 left-3">
-          <Tag type="primary" size="small">{outfit.style}</Tag>
+          <span className={styles.styleTag}>{outfit.style}</span>
         </div>
       </div>
-      
-      <div className="p-4">
-        <h3 className="font-semibold text-gray-800 mb-2">{outfit.title}</h3>
-        <p className="text-sm text-gray-600 mb-3">适合场合：{outfit.occasion}</p>
-        
-        <div className="flex flex-wrap gap-1 mb-3">
+
+      <div className={styles.outfitContent}>
+        <h3 className={styles.outfitTitle}>{outfit.title}</h3>
+        <p className={styles.outfitOccasion}>适合场合：{outfit.occasion}</p>
+
+        <div className={styles.outfitTags}>
           {outfit.tags.map((tag, index) => (
-            <Tag key={index} plain size="small">#{tag}</Tag>
+            <span key={index} className={styles.tag}>#{tag}</span>
           ))}
         </div>
-        
-        <div className="flex items-center justify-between">
+
+        <div className={styles.outfitFooter}>
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-1">
               <LikeO className="text-gray-500 text-sm" />
               <span className="text-sm text-gray-600">{outfit.likes}</span>
             </div>
-            <span className="font-semibold text-red-500">{outfit.price}</span>
+            <span className={styles.price}>{outfit.price}</span>
           </div>
           <div className="flex space-x-2">
-            <ShareO className="text-gray-500" />
-            <DeleteO className="text-gray-500" />
+            <button className={styles.shareButton}>
+              <ShareO className="text-gray-500" />
+            </button>
+            <button className={styles.deleteButton}>
+              <DeleteO className="text-gray-500" />
+            </button>
           </div>
         </div>
       </div>
-    </Card>
+    </div>
   );
 
   const renderItemCard = (item) => (
-    <div key={item.id} className="bg-white rounded-xl shadow-sm overflow-hidden">
+    <div key={item.id} className={styles.itemCard}>
       <div className="relative">
-        <Image
+        <img
           src={item.image}
-          className="w-full h-32 object-cover"
-          fit="cover"
+          className={styles.itemImage}
+          alt={item.name}
         />
         <div className="absolute top-2 left-2">
-          <Tag type="primary" size="small">{item.category}</Tag>
+          <span className={styles.categoryTag}>{item.category}</span>
         </div>
       </div>
-      
-      <div className="p-3">
-        <h4 className="font-medium text-gray-800 text-sm mb-1">{item.name}</h4>
-        <p className="text-xs text-gray-500 mb-2">{item.brand}</p>
-        <div className="flex items-center justify-between">
+
+      <div className={styles.itemContent}>
+        <h4 className={styles.itemName}>{item.name}</h4>
+        <p className={styles.itemBrand}>{item.brand}</p>
+        <div className={styles.itemFooter}>
           <div>
-            <span className="text-red-500 font-semibold text-sm">{item.price}</span>
-            <span className="text-gray-400 text-xs line-through ml-1">{item.originalPrice}</span>
+            <span className={styles.itemPrice}>{item.price}</span>
+            <span className={styles.originalPrice}>{item.originalPrice}</span>
           </div>
-          <ShopO className="text-gray-500 text-sm" />
+          <button className={styles.shopButton}>
+            <ShopO className="text-gray-500 text-sm" />
+          </button>
         </div>
       </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className={styles.container}>
       {/* 顶部标题栏 */}
-      <div className="bg-white px-4 py-3 shadow-sm">
-        <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold text-gray-800">我的收藏</h1>
-          <Button type="primary" size="small" plain>
+      <div className={styles.header}>
+        <div className={styles.headerTop}>
+          <h1 className={styles.title}>我的收藏</h1>
+          <button className={styles.editButton}>
             管理
-          </Button>
+          </button>
         </div>
       </div>
 
       {/* 标签页 */}
-      <div className="bg-white border-b border-gray-100">
-        <Tabs 
-          active={activeTab} 
-          onChange={setActiveTab}
-          className="favorites-tabs"
-        >
-          <Tabs.TabPane title="搭配方案" />
-          <Tabs.TabPane title="单品收藏" />
-        </Tabs>
+      <div className={styles.tabsContainer}>
+        <div className={styles.tabs}>
+          <button
+            className={`${styles.tab} ${activeTab === 0 ? styles.active : ''}`}
+            onClick={() => setActiveTab(0)}
+          >
+            搭配方案
+          </button>
+          <button
+            className={`${styles.tab} ${activeTab === 1 ? styles.active : ''}`}
+            onClick={() => setActiveTab(1)}
+          >
+            单品收藏
+          </button>
+        </div>
       </div>
 
       {/* 内容区域 */}
-      <div className="p-4">
+      <div className={styles.content}>
         {activeTab === 0 ? (
           // 搭配方案
           <div>
             {outfitData.length > 0 ? (
-              <Space direction="vertical" size={0} className="w-full">
+              <div className={styles.outfitList}>
                 {outfitData.map(renderOutfitCard)}
-              </Space>
+              </div>
             ) : (
-              <Empty description="还没有收藏的搭配方案" />
+              <div className={styles.emptyState}>
+                <div className={styles.emptyIcon}>
+                  <StarO className="text-gray-300" size={48} />
+                </div>
+                <p className={styles.emptyText}>还没有收藏的搭配方案</p>
+              </div>
             )}
           </div>
         ) : (
           // 单品收藏
           <div>
             {itemData.length > 0 ? (
-              <Grid columns={2} gutter={12}>
+              <div className={styles.itemGrid}>
                 {itemData.map((item) => (
-                  <Grid.Item key={item.id}>
+                  <div key={item.id} className={styles.itemGridItem}>
                     {renderItemCard(item)}
-                  </Grid.Item>
+                  </div>
                 ))}
-              </Grid>
+              </div>
             ) : (
-              <Empty description="还没有收藏的单品" />
+              <div className={styles.emptyState}>
+                <div className={styles.emptyIcon}>
+                  <StarO className="text-gray-300" size={48} />
+                </div>
+                <p className={styles.emptyText}>还没有收藏的单品</p>
+              </div>
             )}
           </div>
         )}
       </div>
 
       {/* 底部操作 */}
-      <div className="px-4 py-4">
-        <Space size={12} className="w-full">
-          <Button type="primary" block>
+      <div className={styles.actionButtonsContainer}>
+        <div className={styles.actionButtons}>
+          <button className={styles.primaryButton}>
             发现更多搭配
-          </Button>
-          <Button plain block>
+          </button>
+          <button className={styles.secondaryButton}>
             分享我的收藏
-          </Button>
-        </Space>
+          </button>
+        </div>
       </div>
-
-      {/* 底部间距 */}
-      <div className="h-4"></div>
     </div>
   );
 };

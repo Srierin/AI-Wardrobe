@@ -1,15 +1,11 @@
 import { useState } from 'react';
-import { 
-  Cell, 
-  Badge, 
-  Image, 
+import styles from './messages.module.css';
+import {
   Search,
-  Tabs,
   Button,
-  Space,
-  Card
+  Space
 } from 'react-vant';
-import { 
+import {
   Search as SearchIcon,
   ChatO,
   Bell,
@@ -92,28 +88,23 @@ const Messages = () => {
   ];
 
   const renderChatItem = (item) => (
-    <Cell
+    <div
       key={item.id}
-      className="py-3"
-      clickable
+      className={styles.chatItem}
       onClick={() => console.log('打开聊天', item.id)}
     >
-      <div className="flex items-center space-x-3">
-        <div className="relative">
-          <Image
-            src={item.avatar}
-            className="w-12 h-12 rounded-full"
-            fit="cover"
-          />
+      <div className={styles.chatContent}>
+        <div className={styles.avatar}>
+          {item.name.charAt(0)}
           {item.online && (
-            <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
+            <div className={styles.onlineIndicator}></div>
           )}
         </div>
-        
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center justify-between mb-1">
+
+        <div className={styles.chatInfo}>
+          <div className={styles.chatHeader}>
             <div className="flex items-center space-x-2">
-              <h4 className="font-medium text-gray-800 truncate">{item.name}</h4>
+              <h4 className={styles.chatName}>{item.name}</h4>
               {item.isGroup && (
                 <span className="text-xs bg-blue-100 text-blue-600 px-1 rounded">群</span>
               )}
@@ -121,83 +112,91 @@ const Messages = () => {
                 <span className="text-xs bg-green-100 text-green-600 px-1 rounded">官方</span>
               )}
             </div>
-            <span className="text-xs text-gray-500">{item.time}</span>
+            <span className={styles.chatTime}>{item.time}</span>
           </div>
-          <div className="flex items-center justify-between">
-            <p className="text-sm text-gray-600 truncate flex-1">{item.lastMessage}</p>
+          <div className={styles.chatPreview}>
+            <p className={styles.lastMessage}>{item.lastMessage}</p>
             {item.unread > 0 && (
-              <Badge content={item.unread} className="ml-2" />
+              <span className={styles.unreadBadge}>{item.unread}</span>
             )}
           </div>
         </div>
       </div>
-    </Cell>
+    </div>
   );
 
   const renderNotificationItem = (item) => (
-    <Card key={item.id} className="mb-3 rounded-lg shadow-sm">
+    <div key={item.id} className={styles.notificationCard}>
       <div className="p-4">
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <div className="flex items-center space-x-2 mb-2">
-              <h4 className="font-medium text-gray-800">{item.title}</h4>
+        <div className={styles.notificationHeader}>
+          <div className={`${styles.notificationIcon} ${styles[item.type]}`}>
+            {item.type === 'system' && <SettingO />}
+            {item.type === 'activity' && <Bell />}
+            {item.type === 'social' && <ChatO />}
+          </div>
+          <div className={styles.notificationInfo}>
+            <div className="flex items-center space-x-2 mb-1">
+              <h4 className={styles.notificationTitle}>{item.title}</h4>
               {!item.read && (
                 <div className="w-2 h-2 bg-red-500 rounded-full"></div>
               )}
             </div>
-            <p className="text-sm text-gray-600 mb-2">{item.content}</p>
-            <span className="text-xs text-gray-500">{item.time}</span>
-          </div>
-          <div className="ml-3">
-            {item.type === 'system' && <SettingO className="text-blue-500" />}
-            {item.type === 'activity' && <Bell className="text-orange-500" />}
-            {item.type === 'social' && <ChatO className="text-green-500" />}
+            <p className={styles.notificationDesc}>{item.content}</p>
+            <span className={styles.notificationTime}>{item.time}</span>
           </div>
         </div>
       </div>
-    </Card>
+    </div>
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className={styles.container}>
       {/* 顶部标题栏 */}
-      <div className="bg-white px-4 py-3 shadow-sm">
-        <div className="flex items-center justify-between mb-3">
-          <h1 className="text-xl font-bold text-gray-800">消息</h1>
-          <AddO className="text-gray-600 text-xl" />
+      <div className={styles.header}>
+        <div className={styles.headerTop}>
+          <h1 className={styles.title}>消息</h1>
+          <AddO className={styles.addIcon} />
         </div>
-        <Search
-          value={searchValue}
-          onChange={setSearchValue}
-          placeholder="搜索聊天记录..."
-          shape="round"
-          leftIcon={<SearchIcon />}
-          className="bg-gray-100"
-        />
+        <div className={styles.searchContainer}>
+          <Search
+            value={searchValue}
+            onChange={setSearchValue}
+            placeholder="搜索聊天记录..."
+            shape="round"
+            leftIcon={<SearchIcon className={styles.searchIcon} />}
+            className={styles.searchInput}
+          />
+        </div>
       </div>
 
       {/* 标签页 */}
-      <div className="bg-white border-b border-gray-100">
-        <Tabs 
-          active={activeTab} 
-          onChange={setActiveTab}
-          className="message-tabs"
-        >
-          <Tabs.TabPane title="聊天" />
-          <Tabs.TabPane title="通知" />
-        </Tabs>
+      <div className={styles.tabsContainer}>
+        <div className={styles.tabs}>
+          <button
+            className={`${styles.tab} ${activeTab === 0 ? styles.active : ''}`}
+            onClick={() => setActiveTab(0)}
+          >
+            聊天
+          </button>
+          <button
+            className={`${styles.tab} ${activeTab === 1 ? styles.active : ''}`}
+            onClick={() => setActiveTab(1)}
+          >
+            通知
+          </button>
+        </div>
       </div>
 
       {/* 内容区域 */}
       <div className="flex-1">
         {activeTab === 0 ? (
           // 聊天列表
-          <div className="bg-white">
+          <div className={styles.chatList}>
             {chatList.map(renderChatItem)}
           </div>
         ) : (
           // 通知列表
-          <div className="p-4">
+          <div className={styles.notificationList}>
             {notificationList.map(renderNotificationItem)}
           </div>
         )}
@@ -205,7 +204,7 @@ const Messages = () => {
 
       {/* 快捷操作 */}
       {activeTab === 0 && (
-        <div className="px-4 py-4">
+        <div className={styles.actionButtonsContainer}>
           <Space size={12} className="w-full">
             <Button type="primary" block icon={<AddO />}>
               发起聊天

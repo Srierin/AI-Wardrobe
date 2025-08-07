@@ -1,0 +1,484 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.4rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 背景装饰 */
+.backgroundDecoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.circle1 {
+  position: absolute;
+  top: -2rem;
+  right: -2rem;
+  width: 8rem;
+  height: 8rem;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.circle2 {
+  position: absolute;
+  bottom: -3rem;
+  left: -3rem;
+  width: 12rem;
+  height: 12rem;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 8s ease-in-out infinite reverse;
+}
+
+.circle3 {
+  position: absolute;
+  top: 50%;
+  right: -1rem;
+  width: 4rem;
+  height: 4rem;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-0.4rem);
+  }
+}
+
+/* 登录卡片 */
+.loginCard {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 0.8rem;
+  width: 100%;
+  max-width: 8rem;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(0.8rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 头部区域 */
+.header {
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+
+.logo {
+  margin-bottom: 0.4rem;
+}
+
+.logoIcon {
+  width: 1.6rem;
+  height: 1.6rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  margin: 0 auto;
+  box-shadow: 0 0.2rem 0.8rem rgba(102, 126, 234, 0.3);
+}
+
+.title {
+  font-size: 0.6rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0.3rem 0 0.2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 0.35rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 表单区域 */
+.form {
+  margin-bottom: 0.6rem;
+}
+
+.formGroup {
+  margin-bottom: 0.4rem;
+}
+
+.input {
+  border-radius: 0.3rem;
+  border: 0.025rem solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.input:focus-within {
+  border-color: #667eea;
+  box-shadow: 0 0 0 0.05rem rgba(102, 126, 234, 0.2);
+}
+
+.eyeIcon {
+  cursor: pointer;
+  color: #999;
+  transition: color 0.2s ease;
+}
+
+.eyeIcon:hover {
+  color: #667eea;
+}
+
+.loginButton {
+  height: 1.2rem;
+  border-radius: 0.3rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  font-size: 0.4rem;
+  font-weight: 600;
+  margin-top: 0.4rem;
+  transition: all 0.3s ease;
+}
+
+.loginButton:hover {
+  transform: translateY(-0.05rem);
+  box-shadow: 0 0.2rem 0.8rem rgba(102, 126, 234, 0.3);
+}
+
+.loginButton:active {
+  transform: translateY(0);
+}
+
+/* 快速登录 */
+.quickLogin {
+  margin-bottom: 0.6rem;
+  text-align: center;
+}
+
+.quickLoginTitle {
+  font-size: 0.3rem;
+  color: #666;
+  margin: 0 0 0.3rem;
+}
+
+.quickLoginButtons {
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
+}
+
+.quickButton {
+  flex: 1;
+  height: 0.8rem;
+  font-size: 0.3rem;
+  border: 0.025rem solid #667eea;
+  color: #667eea;
+  background: white;
+  border-radius: 0.2rem;
+  transition: all 0.2s ease;
+}
+
+.quickButton:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-0.025rem);
+}
+
+/* 登录提示 */
+.loginTips {
+  background: #f8f9fa;
+  border-radius: 0.3rem;
+  padding: 0.4rem;
+  margin-bottom: 0.6rem;
+  border-left: 0.1rem solid #667eea;
+}
+
+.tipItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.2rem;
+}
+
+.tipItem:last-child {
+  margin-bottom: 0;
+}
+
+.tipLabel {
+  font-size: 0.3rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.tipValue {
+  font-size: 0.3rem;
+  color: #333;
+  font-family: 'Courier New', monospace;
+  background: #e9ecef;
+  padding: 0.1rem 0.2rem;
+  border-radius: 0.1rem;
+}
+
+/* 功能介绍 */
+.features {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 0.4rem;
+}
+
+.feature {
+  text-align: center;
+  flex: 1;
+}
+
+.featureIcon {
+  font-size: 0.6rem;
+  margin-bottom: 0.2rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.featureText {
+  font-size: 0.25rem;
+  color: #666;
+  line-height: 1.2;
+}
+
+/* 底部信息 */
+.footer {
+  position: absolute;
+  bottom: 0.4rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 2;
+}
+
+.footer p {
+  font-size: 0.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .container {
+    padding: 0.3rem;
+  }
+  
+  .loginCard {
+    padding: 0.6rem;
+    max-width: none;
+  }
+  
+  .title {
+    font-size: 0.5rem;
+  }
+  
+  .subtitle {
+    font-size: 0.3rem;
+  }
+  
+  .quickLoginButtons {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  
+  .features {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  
+  .feature {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    text-align: left;
+  }
+  
+  .featureIcon {
+    font-size: 0.5rem;
+    margin-bottom: 0;
+    height: auto;
+  }
+}
+
+/* 横屏适配 */
+@media (orientation: landscape) and (max-height: 500px) {
+  .container {
+    padding: 0.2rem;
+  }
+  
+  .loginCard {
+    padding: 0.4rem;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .header {
+    margin-bottom: 0.4rem;
+  }
+  
+  .features {
+    display: none;
+  }
+  
+  .footer {
+    display: none;
+  }
+}
+
+/* 加载状态 */
+.loginButton[disabled] {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* 错误状态 */
+.input.error {
+  border-color: #ff4757;
+  box-shadow: 0 0 0 0.05rem rgba(255, 71, 87, 0.2);
+}
+
+/* 成功状态 */
+.input.success {
+  border-color: #2ed573;
+  box-shadow: 0 0 0 0.05rem rgba(46, 213, 115, 0.2);
+}
+
+/* 动画效果 */
+.formGroup {
+  animation: fadeInUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.formGroup:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.formGroup:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loginButton {
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+.quickLogin {
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+.loginTips {
+  animation: fadeInUp 0.6s ease-out 0.5s both;
+}
+
+.features {
+  animation: fadeInUp 0.6s ease-out 0.6s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(0.4rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 聚焦效果 */
+.input:focus-within {
+  transform: translateY(-0.025rem);
+}
+
+/* 按钮点击效果 */
+.quickButton:active,
+.loginButton:active {
+  transform: scale(0.98);
+}
+
+/* 深色模式支持 */
+@media (prefers-color-scheme: dark) {
+  .loginCard {
+    background: #1a1a1a;
+    color: white;
+  }
+  
+  .title {
+    color: white;
+  }
+  
+  .subtitle {
+    color: #ccc;
+  }
+  
+  .input {
+    background: #2a2a2a;
+    border-color: #444;
+    color: white;
+  }
+  
+  .loginTips {
+    background: #2a2a2a;
+  }
+  
+  .tipValue {
+    background: #444;
+    color: white;
+  }
+}
+
+
+.successMessage {
+  color: #07c160;
+  background-color: #f0f9eb;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.errorMessage {
+  color: #ee0a24;
+  background-color: #fef0f0;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}

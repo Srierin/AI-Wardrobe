@@ -1,0 +1,440 @@
+.container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: 1.6rem;
+  /* 64px */
+}
+
+/* 顶部搜索栏 */
+.header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1rem 0.4rem 0.6rem;
+  /* 40px 16px 24px */
+  color: white;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  /* 12px */
+  margin-bottom: 0.3rem;
+  /* 12px */
+}
+
+.searchWrapper {
+  flex: 1;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.25rem 0.3rem 0.25rem 0.8rem;
+  /* 10px 12px 10px 32px */
+  border: none;
+  border-radius: 0.5rem;
+  /* 20px */
+  background-color: rgba(255, 255, 255, 0.9);
+  font-size: 0.35rem;
+  /* 14px */
+  color: #333;
+}
+
+.searchInput::placeholder {
+  color: #999;
+}
+
+.notificationIcon {
+  font-size: 0.5rem;
+  /* 20px */
+  color: white;
+  cursor: pointer;
+}
+
+/* 天气通知栏 */
+.weatherNotice {
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 0.25rem 0.3rem;
+  /* 10px 12px */
+  border-radius: 0.2rem;
+  /* 8px */
+  font-size: 0.3rem;
+  /* 12px */
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  /* 8px */
+}
+
+.weatherIcon {
+  font-size: 0.35rem;
+  /* 14px */
+}
+
+/* 今日穿搭推荐 */
+.todaySection {
+  padding: 0.4rem;
+  /* 16px */
+}
+
+.sectionTitle {
+  font-size: 0.45rem;
+  /* 18px */
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.3rem;
+  /* 12px */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.moreButton {
+  font-size: 0.3rem;
+  /* 12px */
+  color: #667eea;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.outfitGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.3rem;
+  /* 12px */
+  margin-bottom: 0.4rem;
+  /* 16px */
+}
+
+.outfitCard {
+  background: white;
+  border-radius: 0.3rem;
+  /* 12px */
+  overflow: hidden;
+  box-shadow: 0 0.05rem 0.3rem rgba(0, 0, 0, 0.1);
+  /* 0 2px 12px */
+  transition: transform 0.2s ease;
+}
+
+.outfitCard:hover {
+  transform: translateY(-0.05rem);
+  /* -2px */
+}
+
+.outfitImage {
+  width: 100%;
+  height: 2rem;
+  /* 80px */
+  background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  /* 24px */
+}
+
+.outfitInfo {
+  padding: 0.25rem;
+  /* 10px */
+}
+
+.outfitTitle {
+  font-size: 0.3rem;
+  /* 12px */
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.1rem;
+  /* 4px */
+}
+
+.outfitTemp {
+  font-size: 0.25rem;
+  /* 10px */
+  color: #666;
+  margin-bottom: 0.1rem;
+  /* 4px */
+}
+
+.outfitTags {
+  display: flex;
+  gap: 0.1rem;
+  /* 4px */
+}
+
+.outfitTag {
+  background-color: #f0f0f0;
+  color: #666;
+  padding: 0.05rem 0.15rem;
+  /* 2px 6px */
+  border-radius: 0.25rem;
+  /* 10px */
+  font-size: 0.2rem;
+  /* 8px */
+}
+
+/* 智能功能网格 */
+.functionsSection {
+  padding: 0 0.4rem 0.4rem;
+  /* 0 16px 16px */
+}
+
+.functionsContent {
+  padding: 0.4rem;
+}
+
+.functionsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.3rem;
+  /* 12px */
+  margin-bottom: 0.4rem;
+  /* 16px */
+}
+
+.functionItem {
+  background: white;
+  border-radius: 0.3rem;
+  /* 12px */
+  padding: 0.4rem 0.2rem;
+  /* 16px 8px */
+  text-align: center;
+  box-shadow: 0 0.05rem 0.2rem rgba(0, 0, 0, 0.1);
+  /* 0 2px 8px */
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.functionItem:hover {
+  transform: translateY(-0.05rem);
+  /* -2px */
+  box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.15);
+  /* 0 4px 16px */
+}
+
+.functionIcon {
+  width: 1rem;
+  /* 40px */
+  height: 1rem;
+  /* 40px */
+  border-radius: 0.25rem;
+  /* 10px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.2rem;
+  /* 0 auto 8px */
+  font-size: 0.5rem;
+  /* 20px */
+}
+
+.functionIcon.pink {
+  background-color: #ffeaa7;
+  color: #e84393;
+}
+
+.functionIcon.blue {
+  background-color: #a8e6cf;
+  color: #00b894;
+}
+
+.functionIcon.purple {
+  background-color: #dda0dd;
+  color: #6c5ce7;
+}
+
+.functionIcon.green {
+  background-color: #98fb98;
+  color: #00b894;
+}
+
+.functionText {
+  font-size: 0.3rem;
+  /* 12px */
+  color: #333;
+  font-weight: 500;
+}
+
+/* 搭配灵感 */
+.inspirationSection {
+  padding: 0 0.4rem;
+  /* 0 16px */
+}
+
+.inspirationList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  /* 12px */
+}
+
+.inspirationCard {
+  background: white;
+  border-radius: 0.3rem;
+  /* 12px */
+  padding: 0.4rem;
+  /* 16px */
+  box-shadow: 0 0.05rem 0.2rem rgba(0, 0, 0, 0.1);
+  /* 0 2px 8px */
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.inspirationCard:hover {
+  transform: translateY(-0.05rem);
+  /* -2px */
+}
+
+.inspirationHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  /* 10px */
+  margin-bottom: 0.25rem;
+  /* 10px */
+}
+
+.inspirationAvatar {
+  width: 0.8rem;
+  /* 32px */
+  height: 0.8rem;
+  /* 32px */
+  border-radius: 50%;
+  background: linear-gradient(45deg, #ff6b6b, #feca57);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.35rem;
+  /* 14px */
+}
+
+.inspirationAuthor {
+  flex: 1;
+}
+
+.authorName {
+  font-size: 0.35rem;
+  /* 14px */
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.05rem;
+  /* 2px */
+}
+
+.authorLevel {
+  font-size: 0.25rem;
+  /* 10px */
+  color: #999;
+}
+
+.inspirationBadge {
+  background: linear-gradient(45deg, #ff6b6b, #feca57);
+  color: white;
+  padding: 0.1rem 0.2rem;
+  /* 4px 8px */
+  border-radius: 0.25rem;
+  /* 10px */
+  font-size: 0.2rem;
+  /* 8px */
+  font-weight: 600;
+}
+
+.inspirationTitle {
+  font-size: 0.4rem;
+  /* 16px */
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.2rem;
+  /* 8px */
+}
+
+.inspirationDesc {
+  font-size: 0.3rem;
+  /* 12px */
+  color: #666;
+  line-height: 1.4;
+  margin-bottom: 0.25rem;
+  /* 10px */
+}
+
+.inspirationTags {
+  display: flex;
+  gap: 0.15rem;
+  /* 6px */
+  margin-bottom: 0.25rem;
+  /* 10px */
+}
+
+.inspirationTag {
+  background-color: #f0f0f0;
+  color: #666;
+  padding: 0.1rem 0.2rem;
+  /* 4px 8px */
+  border-radius: 0.25rem;
+  /* 10px */
+  font-size: 0.25rem;
+  /* 10px */
+}
+
+.inspirationStats {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  /* 16px */
+  font-size: 0.3rem;
+  /* 12px */
+  color: #999;
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  /* 4px */
+}
+
+.statIcon {
+  font-size: 0.35rem;
+  /* 14px */
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .outfitGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .functionsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+    /* 20px */
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container>* {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.container>*:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.container>*:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.container>*:nth-child(4) {
+  animation-delay: 0.3s;
+}

@@ -1,18 +1,13 @@
 import { useState } from 'react';
-import { 
-  Search, 
-  NoticeBar, 
-  Grid, 
-  Card, 
-  Image,
-  Button,
-  Space,
-  Tag,
-  Swiper
+import styles from './home.module.css';
+
+import {
+  Search,
+  NoticeBar
 } from 'react-vant';
-import { 
-  Search as SearchIcon, 
-  Bell, 
+import {
+  Search as SearchIcon,
+  Bell,
   FireO,
   UserO,
   PhotoO,
@@ -89,28 +84,28 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className={styles.container}>
       {/* 顶部搜索栏 */}
-      <div className="bg-white px-4 py-3 shadow-sm">
-        <div className="flex items-center space-x-3">
-          <div className="flex-1">
+      <div className={styles.header}>
+        <div className={styles.searchContainer}>
+          <div className={styles.searchWrapper}>
             <Search
               value={searchValue}
               onChange={setSearchValue}
               placeholder="搜索穿搭灵感、单品..."
               shape="round"
               leftIcon={<SearchIcon />}
-              className="bg-gray-100"
+              className={styles.searchInput}
             />
           </div>
-          <Bell className="text-gray-600 text-xl" />
+          <Bell className={styles.notificationIcon} />
         </div>
       </div>
 
       {/* 通知栏 */}
-      <div className="px-4 py-2">
+      <div className={styles.weatherNotice}>
         <NoticeBar
-          leftIcon={<FireO />}
+          leftIcon={<FireO className={styles.weatherIcon} />}
           text="今日天气晴朗，推荐清爽夏日搭配！AI为你精选了3套穿搭方案"
           color="#1976d2"
           background="#e3f2fd"
@@ -118,100 +113,83 @@ const Home = () => {
       </div>
 
       {/* 今日穿搭推荐轮播 */}
-      <div className="px-4 py-3">
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-lg font-semibold text-gray-800">今日穿搭推荐</h3>
-          <Button type="primary" size="small" plain>
-            更多推荐
-          </Button>
+      <div className={styles.todaySection}>
+        <div className={styles.sectionTitle}>
+          <h3>今日穿搭推荐</h3>
+          <button className={styles.moreButton}>更多推荐</button>
         </div>
-        <div className="flex space-x-3 overflow-x-auto pb-2">
+        <div className={styles.outfitGrid}>
           {todayOutfits.map((outfit) => (
-            <Card key={outfit.id} className="rounded-xl shadow-sm overflow-hidden flex-shrink-0 w-48">
-              <div className="relative">
-                <Image
-                  src={outfit.image}
-                  className="w-full h-32 object-cover"
-                  fit="cover"
-                />
-                <div className="absolute top-2 left-2">
-                  <Tag type="primary" size="small">{outfit.style}</Tag>
-                </div>
-              </div>
-              <div className="p-3">
-                <h4 className="font-medium text-gray-800 text-sm mb-1">{outfit.title}</h4>
-                <p className="text-xs text-gray-500 mb-2">{outfit.weather}</p>
-                <div className="flex flex-wrap gap-1">
+            <div key={outfit.id} className={styles.outfitCard}>
+              <div className={styles.outfitImage}>{outfit.title}</div>
+              <div className={styles.outfitInfo}>
+                <h4 className={styles.outfitTitle}>{outfit.title}</h4>
+                <p className={styles.outfitTemp}>{outfit.weather}</p>
+                <div className={styles.outfitTags}>
                   {outfit.items.slice(0, 2).map((item, index) => (
-                    <span key={index} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">
+                    <span key={index} className={styles.outfitTag}>
                       {item}
                     </span>
                   ))}
                 </div>
               </div>
-            </Card>
+            </div>
           ))}
         </div>
       </div>
 
       {/* 快捷功能网格 */}
-      <div className="px-4 py-3">
-        <Card className="rounded-xl shadow-sm">
-          <div className="p-4">
-            <h3 className="text-lg font-semibold mb-4 text-gray-800">智能功能</h3>
-            <Grid columns={4} gutter={16}>
+      <div className={styles.functionsSection}>
+        <div>
+          <div className={styles.functionsContent}>
+            <h3 className={styles.sectionTitle}>智能功能</h3>
+            <div className={styles.functionsGrid}>
               {gridData.map((item, index) => (
-                <Grid.Item key={index}>
-                  <div className="text-center">
-                    <div className={`w-12 h-12 rounded-xl ${item.color} flex items-center justify-center mx-auto mb-2`}>
+                <div key={index}>
+                  <div className={styles.functionItem}>
+                    <div className={`${styles.functionIcon} ${styles[item.color.replace('bg-', '').split('-')[0]]}`}>
                       {item.icon}
                     </div>
-                    <span className="text-sm text-gray-600">{item.text}</span>
+                    <span className={styles.functionText}>{item.text}</span>
                   </div>
-                </Grid.Item>
+                </div>
               ))}
-            </Grid>
+            </div>
           </div>
-        </Card>
+        </div>
       </div>
 
       {/* 搭配灵感 */}
-      <div className="px-4 py-3">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold text-gray-800">搭配灵感</h3>
-          <Button type="primary" size="small" plain>
-            查看更多
-          </Button>
+      <div className={styles.inspirationSection}>
+        <div className={styles.sectionTitle}>
+          <h3>搭配灵感</h3>
+          <button className={styles.moreButton}>查看更多</button>
         </div>
-        
-        <Space direction="vertical" size={12} className="w-full">
+
+        <div className={styles.inspirationList}>
           {inspirationData.map((item) => (
-            <Card key={item.id} className="rounded-xl shadow-sm overflow-hidden">
+            <div key={item.id} className={styles.inspirationCard}>
               <div className="flex">
                 <div className="flex-1 p-4">
                   <div className="flex items-center mb-2">
-                    <span className="bg-pink-500 text-white text-xs px-2 py-1 rounded-full">
+                    <span className={styles.inspirationBadge}>
                       {item.tag}
                     </span>
                   </div>
-                  <h4 className="font-semibold text-gray-800 mb-1">{item.title}</h4>
-                  <p className="text-sm text-gray-600 mb-2">{item.subtitle}</p>
+                  <h4 className={styles.inspirationTitle}>{item.title}</h4>
+                  <p className={styles.inspirationDesc}>{item.subtitle}</p>
                   <div className="flex items-center space-x-1">
-                    <LikeO className="text-red-500 text-sm" />
-                    <span className="text-sm text-gray-600">{item.likes}</span>
+                    <LikeO className={styles.statIcon} />
+                    <span className={styles.statItem}>{item.likes}</span>
                   </div>
                 </div>
                 <div className="w-24 h-24 m-4">
-                  <Image
-                    src={item.image}
-                    className="w-full h-full rounded-lg object-cover"
-                    fit="cover"
-                  />
+                  <div className={styles.outfitImage}>{item.title}</div>
                 </div>
               </div>
-            </Card>
+            </div>
           ))}
-        </Space>
+        </div>
       </div>
 
       {/* 底部间距 */}
