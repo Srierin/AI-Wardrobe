@@ -1,440 +1,355 @@
-.container {
+.homeContainer {
   min-height: 100vh;
-  background-color: #f5f5f5;
-  padding-bottom: 1.6rem;
-  /* 64px */
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
 }
 
-/* 顶部搜索栏 */
 .header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 1rem 0.4rem 0.6rem;
-  /* 40px 16px 24px */
-  color: white;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.headerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .searchContainer {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  /* 12px */
-  margin-bottom: 0.3rem;
-  /* 12px */
-}
-
-.searchWrapper {
   flex: 1;
+  position: relative;
 }
 
 .searchInput {
   width: 100%;
-  padding: 0.25rem 0.3rem 0.25rem 0.8rem;
-  /* 10px 12px 10px 32px */
+  padding: 12px 16px 12px 40px;
+  background: #f1f5f9;
   border: none;
-  border-radius: 0.5rem;
-  /* 20px */
-  background-color: rgba(255, 255, 255, 0.9);
-  font-size: 0.35rem;
-  /* 14px */
-  color: #333;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
 }
 
-.searchInput::placeholder {
-  color: #999;
+.searchInput:focus {
+  outline: none;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
-.notificationIcon {
-  font-size: 0.5rem;
-  /* 20px */
+.searchIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  width: 16px;
+  height: 16px;
+}
+
+.userButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  /* background: linear-gradient(135deg, #6d6d87, #ada1aa); */
+  background: #10b981;
   color: white;
-  cursor: pointer;
-}
-
-/* 天气通知栏 */
-.weatherNotice {
-  background-color: rgba(255, 255, 255, 0.15);
-  padding: 0.25rem 0.3rem;
-  /* 10px 12px */
-  border-radius: 0.2rem;
-  /* 8px */
-  font-size: 0.3rem;
-  /* 12px */
+  border: none;
   display: flex;
   align-items: center;
-  gap: 0.2rem;
-  /* 8px */
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.userButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(141, 141, 153, 0.3);
+}
+
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.weatherBanner {
+  background: linear-gradient(
+    to top right,
+    rgba(255, 105, 180, 0.1), /* 起始点透明度稍微调低 */
+    rgba(255, 105, 180, 0.3), /* 稍微降低透明度，原先是 0.5 */
+    rgba(255, 105, 180, 0.6), /* 稍微降低透明度，原先是 0.8 */
+    rgba(255, 105, 180, 0.9)  /* 稍微降低透明度，接近完全不透明但保留一点透明感 */
+  );
+  border-radius: 16px;
+  padding: 20px;
+  color: white;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .weatherIcon {
-  font-size: 0.35rem;
-  /* 14px */
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
 }
 
-/* 今日穿搭推荐 */
-.todaySection {
-  padding: 0.4rem;
-  /* 16px */
+.weatherText {
+  font-size: 16px;
+  font-weight: 500;
 }
 
-.sectionTitle {
-  font-size: 0.45rem;
-  /* 18px */
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 0.3rem;
-  /* 12px */
+.section {
+  margin-bottom: 32px;
+}
+
+.sectionHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
 }
 
 .moreButton {
-  font-size: 0.3rem;
-  /* 12px */
-  color: #667eea;
-  background: none;
+  background: #f59e0b;
+  color: white;
   border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.moreButton:hover {
+  background: #d97706;
+  transform: translateY(-1px);
 }
 
 .outfitGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.3rem;
-  /* 12px */
-  margin-bottom: 0.4rem;
-  /* 16px */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
 }
 
 .outfitCard {
   background: white;
-  border-radius: 0.3rem;
-  /* 12px */
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 0.05rem 0.3rem rgba(0, 0, 0, 0.1);
-  /* 0 2px 12px */
-  transition: transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .outfitCard:hover {
-  transform: translateY(-0.05rem);
-  /* -2px */
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
 .outfitImage {
-  width: 100%;
-  height: 2rem;
-  /* 80px */
-  background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+  height: 200px;
+  background: linear-gradient(135deg, #a855f7, #ec4899);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.6rem;
-  /* 24px */
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .outfitInfo {
-  padding: 0.25rem;
-  /* 10px */
+  padding: 16px;
 }
 
 .outfitTitle {
-  font-size: 0.3rem;
-  /* 12px */
+  font-size: 16px;
   font-weight: 600;
-  color: #333;
-  margin-bottom: 0.1rem;
-  /* 4px */
+  color: #000;
+  margin-bottom: 8px;
 }
 
-.outfitTemp {
-  font-size: 0.25rem;
-  /* 10px */
-  color: #666;
-  margin-bottom: 0.1rem;
-  /* 4px */
+.outfitMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #64748b;
 }
 
 .outfitTags {
   display: flex;
-  gap: 0.1rem;
-  /* 4px */
+  gap: 8px;
 }
 
 .outfitTag {
-  background-color: #f0f0f0;
-  color: #666;
-  padding: 0.05rem 0.15rem;
-  /* 2px 6px */
-  border-radius: 0.25rem;
-  /* 10px */
-  font-size: 0.2rem;
-  /* 8px */
+  background: #f1f5f9;
+  color: #475569;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
 }
 
-/* 智能功能网格 */
-.functionsSection {
-  padding: 0 0.4rem 0.4rem;
-  /* 0 16px 16px */
-}
-
-.functionsContent {
-  padding: 0.4rem;
-}
-
-.functionsGrid {
+.featuresGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.3rem;
-  /* 12px */
-  margin-bottom: 0.4rem;
-  /* 16px */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
 }
 
-.functionItem {
+.featureCard {
   background: white;
-  border-radius: 0.3rem;
-  /* 12px */
-  padding: 0.4rem 0.2rem;
-  /* 16px 8px */
+  border-radius: 16px;
+  padding: 24px;
   text-align: center;
-  box-shadow: 0 0.05rem 0.2rem rgba(0, 0, 0, 0.1);
-  /* 0 2px 8px */
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
   cursor: pointer;
 }
 
-.functionItem:hover {
-  transform: translateY(-0.05rem);
-  /* -2px */
-  box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.15);
-  /* 0 4px 16px */
+.featureCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
-.functionIcon {
-  width: 1rem;
-  /* 40px */
-  height: 1rem;
-  /* 40px */
-  border-radius: 0.25rem;
-  /* 10px */
+.featureIcon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 0.2rem;
-  /* 0 auto 8px */
-  font-size: 0.5rem;
-  /* 20px */
+  margin: 0 auto 16px;
+  font-size: 24px;
+  color: white;
 }
 
-.functionIcon.pink {
-  background-color: #ffeaa7;
-  color: #e84393;
+.featureIcon.ai {
+  background: linear-gradient(135deg, #ec4899, #be185d);
 }
 
-.functionIcon.blue {
-  background-color: #a8e6cf;
-  color: #00b894;
+.featureIcon.weather {
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
 }
 
-.functionIcon.purple {
-  background-color: #dda0dd;
-  color: #6c5ce7;
+.featureIcon.style {
+  background: linear-gradient(135deg, #8b5cf6, #7c3aed);
 }
 
-.functionIcon.green {
-  background-color: #98fb98;
-  color: #00b894;
+.featureIcon.shopping {
+  background: linear-gradient(135deg, #10b981, #059669);
 }
 
-.functionText {
-  font-size: 0.3rem;
-  /* 12px */
-  color: #333;
-  font-weight: 500;
+.featureTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 8px;
 }
 
-/* 搭配灵感 */
-.inspirationSection {
-  padding: 0 0.4rem;
-  /* 0 16px */
+.featureDesc {
+  font-size: 14px;
+  color: #64748b;
 }
 
 .inspirationList {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  /* 12px */
+  gap: 16px;
 }
 
 .inspirationCard {
   background: white;
-  border-radius: 0.3rem;
-  /* 12px */
-  padding: 0.4rem;
-  /* 16px */
-  box-shadow: 0 0.05rem 0.2rem rgba(0, 0, 0, 0.1);
-  /* 0 2px 8px */
-  transition: transform 0.2s ease;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .inspirationCard:hover {
-  transform: translateY(-0.05rem);
-  /* -2px */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .inspirationHeader {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  /* 10px */
-  margin-bottom: 0.25rem;
-  /* 10px */
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
-.inspirationAvatar {
-  width: 0.8rem;
-  /* 32px */
-  height: 0.8rem;
-  /* 32px */
-  border-radius: 50%;
-  background: linear-gradient(45deg, #ff6b6b, #feca57);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 0.35rem;
-  /* 14px */
-}
-
-.inspirationAuthor {
-  flex: 1;
-}
-
-.authorName {
-  font-size: 0.35rem;
-  /* 14px */
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 0.05rem;
-  /* 2px */
-}
-
-.authorLevel {
-  font-size: 0.25rem;
-  /* 10px */
-  color: #999;
-}
-
-.inspirationBadge {
-  background: linear-gradient(45deg, #ff6b6b, #feca57);
-  color: white;
-  padding: 0.1rem 0.2rem;
-  /* 4px 8px */
-  border-radius: 0.25rem;
-  /* 10px */
-  font-size: 0.2rem;
-  /* 8px */
-  font-weight: 600;
+.inspirationCategory {
+  background: #ddd6fe;
+  color: #7c3aed;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .inspirationTitle {
-  font-size: 0.4rem;
-  /* 16px */
+  font-size: 16px;
   font-weight: 600;
-  color: #333;
-  margin-bottom: 0.2rem;
-  /* 8px */
+  color: #1e293b;
+  margin-bottom: 8px;
 }
 
 .inspirationDesc {
-  font-size: 0.3rem;
-  /* 12px */
-  color: #666;
-  line-height: 1.4;
-  margin-bottom: 0.25rem;
-  /* 10px */
-}
-
-.inspirationTags {
-  display: flex;
-  gap: 0.15rem;
-  /* 6px */
-  margin-bottom: 0.25rem;
-  /* 10px */
-}
-
-.inspirationTag {
-  background-color: #f0f0f0;
-  color: #666;
-  padding: 0.1rem 0.2rem;
-  /* 4px 8px */
-  border-radius: 0.25rem;
-  /* 10px */
-  font-size: 0.25rem;
-  /* 10px */
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 12px;
 }
 
 .inspirationStats {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  /* 16px */
-  font-size: 0.3rem;
-  /* 12px */
-  color: #999;
+  gap: 16px;
+  font-size: 14px;
+  color: #64748b;
 }
 
-.statItem {
+.inspirationStat {
   display: flex;
   align-items: center;
-  gap: 0.1rem;
-  /* 4px */
+  gap: 4px;
 }
 
-.statIcon {
-  font-size: 0.35rem;
-  /* 14px */
+.inspirationImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f472b6, #ec4899);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
 }
 
-/* 响应式设计 */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .outfitGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .featuresGrid {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  .functionsGrid {
-    grid-template-columns: repeat(2, 1fr);
+  
+  .content {
+    padding: 16px;
   }
-}
-
-/* 动画效果 */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(0.5rem);
-    /* 20px */
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.container>* {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-.container>*:nth-child(2) {
-  animation-delay: 0.1s;
-}
-
-.container>*:nth-child(3) {
-  animation-delay: 0.2s;
-}
-
-.container>*:nth-child(4) {
-  animation-delay: 0.3s;
 }

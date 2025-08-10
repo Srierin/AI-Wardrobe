@@ -1,15 +1,18 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './favorites.module.css';
 import {
   LikeO,
   StarO,
   ShareO,
   DeleteO,
-  ShopO
+  ShopO,
+  ArrowLeft
 } from '@react-vant/icons';
 
 const Favorites = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const navigate = useNavigate();
 
   // 收藏的穿搭数据
   const outfitData = [
@@ -169,6 +172,9 @@ const Favorites = () => {
       {/* 顶部标题栏 */}
       <div className={styles.header}>
         <div className={styles.headerTop}>
+          <button className={styles.backButton} onClick={() => navigate('/home')}>
+            <ArrowLeft size={20} />
+          </button>
           <h1 className={styles.title}>我的收藏</h1>
           <button className={styles.editButton}>
             管理

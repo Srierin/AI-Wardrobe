@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-
+import Mock from 'mockjs';
 // JWT密钥 - 生产环境中应该使用环境变量
 const JWT_SECRET = '$#@!AI_WARDROBE_SECRET_2025';
 
@@ -126,6 +126,16 @@ const verifyToken = (token) => {
     throw new Error('Token无效或已过期');
   }
 };
+
+// // 每页10条数据
+// const getImages = (page, pageSize = 10) => {
+//   return Array.from({ length: pageSize }, (_, i) => ({
+//     // 索引唯一
+//     id: `${page}-${i}`,
+//     height: Mock.Random.integer(300, 600), // 随机生成高度
+//     url: Mock.Random.image('300x400', Mock.Random.color(), '#FFF', 'png'), // 随机生成图片 URL
+//   }))
+// }
 
 // Mock API响应
 export default [
@@ -369,5 +379,28 @@ export default [
         message: '退出成功'
       };
     }
-  }
+  },
+
+  {
+    url: '/api/images',
+    method: 'get',
+    timeout: 1000,
+    response: ({ query }) => {
+      const page = Number(query.page) || 1;
+      
+      // 生成随机图片数据
+      const getImages = (page, pageSize = 10) => {
+        return Array.from({ length: pageSize }, (_, i) => ({
+          id: `${page}-${i}`,
+          height: Mock.Random.integer(300, 600),
+          url: `https://picsum.photos/300/400?random=${page * 10 + i}&t=${Date.now()}`,
+        }));
+      }
+      
+      return {
+        code: 0,
+        data: getImages(page)
+      };
+    }
+  },
 ];

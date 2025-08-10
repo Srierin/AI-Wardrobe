@@ -5,7 +5,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0.4rem;
+  padding: 16px;
   position: relative;
   overflow: hidden;
 }
@@ -23,10 +23,10 @@
 
 .circle1 {
   position: absolute;
-  top: -2rem;
-  right: -2rem;
-  width: 8rem;
-  height: 8rem;
+  top: -32px;
+  right: -32px;
+  width: 128px;
+  height: 128px;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
   border-radius: 50%;
   animation: float 6s ease-in-out infinite;
@@ -34,10 +34,10 @@
 
 .circle2 {
   position: absolute;
-  bottom: -3rem;
-  left: -3rem;
-  width: 12rem;
-  height: 12rem;
+  bottom: -48px;
+  left: -48px;
+  width: 192px;
+  height: 192px;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
   border-radius: 50%;
   animation: float 8s ease-in-out infinite reverse;
@@ -46,12 +46,12 @@
 .circle3 {
   position: absolute;
   top: 50%;
-  right: -1rem;
-  width: 4rem;
-  height: 4rem;
+  right: -16px;
+  width: 64px;
+  height: 64px;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
   border-radius: 50%;
-  animation: float 4s ease-in-out infinite;
+  animation: float 10s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -59,174 +59,255 @@
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-0.4rem);
+    transform: translateY(-20px);
   }
 }
 
 /* 登录卡片 */
 .loginCard {
-  background: white;
-  border-radius: 0.5rem;
-  padding: 0.8rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 40px;
   width: 100%;
-  max-width: 8rem;
-  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
   position: relative;
-  z-index: 2;
-  animation: slideUp 0.6s ease-out;
+  z-index: 10;
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(0.8rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 头部区域 */
+/* 头部 */
 .header {
   text-align: center;
-  margin-bottom: 0.8rem;
+  margin-bottom: 32px;
 }
 
 .logo {
-  margin-bottom: 0.4rem;
+  margin-bottom: 16px;
 }
 
 .logoIcon {
-  width: 1.6rem;
-  height: 1.6rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
   margin: 0 auto;
-  box-shadow: 0 0.2rem 0.8rem rgba(102, 126, 234, 0.3);
+  font-size: 24px;
+  color: white;
 }
 
 .title {
-  font-size: 0.6rem;
-  font-weight: bold;
-  color: #333;
-  margin: 0.3rem 0 0.2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 8px;
 }
 
 .subtitle {
-  font-size: 0.35rem;
-  color: #666;
-  margin: 0;
-  line-height: 1.4;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
-/* 表单区域 */
+/* 状态消息 */
+.successMessage {
+  background: #dcfce7;
+  color: #166534;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #bbf7d0;
+}
+
+.errorMessage {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #fecaca;
+}
+
+/* 模式切换 */
+.modeSwitch {
+  display: flex;
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 24px;
+}
+
+.modeButton {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  background: transparent;
+  color: #64748b;
+}
+
+.modeButton.active {
+  background: #6366f1;
+  color: white;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+/* 表单 */
 .form {
-  margin-bottom: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .formGroup {
-  margin-bottom: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .input {
-  border-radius: 0.3rem;
-  border: 0.025rem solid #e0e0e0;
+  width: 100%;
+  padding: 12px 16px 12px 48px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 16px;
   transition: all 0.3s ease;
+  background: white;
 }
 
-.input:focus-within {
-  border-color: #667eea;
-  box-shadow: 0 0 0 0.05rem rgba(102, 126, 234, 0.2);
+.input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.input.inputError {
+  border-color: #ef4444;
+}
+
+.leftIcon {
+  position: absolute;
+  left: 16px;
+  width: 16px;
+  height: 16px;
+  color: #64748b;
+  z-index: 1;
 }
 
 .eyeIcon {
+  position: absolute;
+  right: 16px;
+  width: 16px;
+  height: 16px;
+  color: #64748b;
   cursor: pointer;
-  color: #999;
-  transition: color 0.2s ease;
+  z-index: 1;
 }
 
-.eyeIcon:hover {
-  color: #667eea;
+.errorText {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: 4px;
 }
 
 .loginButton {
-  height: 1.2rem;
-  border-radius: 0.3rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
   border: none;
-  font-size: 0.4rem;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 16px;
   font-weight: 600;
-  margin-top: 0.4rem;
+  cursor: pointer;
   transition: all 0.3s ease;
+  margin-top: 8px;
 }
 
-.loginButton:hover {
-  transform: translateY(-0.05rem);
-  box-shadow: 0 0.2rem 0.8rem rgba(102, 126, 234, 0.3);
+.loginButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
 }
 
-.loginButton:active {
-  transform: translateY(0);
+.loginButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 /* 快速登录 */
 .quickLogin {
-  margin-bottom: 0.6rem;
+  margin-top: 24px;
   text-align: center;
 }
 
 .quickLoginTitle {
-  font-size: 0.3rem;
-  color: #666;
-  margin: 0 0 0.3rem;
+  color: #64748b;
+  font-size: 14px;
+  margin-bottom: 12px;
 }
 
 .quickLoginButtons {
   display: flex;
-  gap: 0.3rem;
-  justify-content: center;
+  gap: 12px;
 }
 
 .quickButton {
   flex: 1;
-  height: 0.8rem;
-  font-size: 0.3rem;
-  border: 0.025rem solid #667eea;
-  color: #667eea;
+  padding: 10px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
   background: white;
-  border-radius: 0.2rem;
-  transition: all 0.2s ease;
+  color: #374151;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
 }
 
-.quickButton:hover {
-  background: #667eea;
-  color: white;
-  transform: translateY(-0.025rem);
+.quickButton:hover:not(:disabled) {
+  border-color: #6366f1;
+  color: #6366f1;
+  transform: translateY(-1px);
+}
+
+.quickButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 /* 登录提示 */
 .loginTips {
-  background: #f8f9fa;
-  border-radius: 0.3rem;
-  padding: 0.4rem;
-  margin-bottom: 0.6rem;
-  border-left: 0.1rem solid #667eea;
+  margin-top: 20px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
 }
 
 .tipItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.2rem;
+  margin-bottom: 8px;
+  font-size: 12px;
 }
 
 .tipItem:last-child {
@@ -234,251 +315,82 @@
 }
 
 .tipLabel {
-  font-size: 0.3rem;
-  color: #666;
+  color: #64748b;
   font-weight: 500;
 }
 
 .tipValue {
-  font-size: 0.3rem;
-  color: #333;
-  font-family: 'Courier New', monospace;
-  background: #e9ecef;
-  padding: 0.1rem 0.2rem;
-  border-radius: 0.1rem;
+  color: #374151;
+  font-family: monospace;
+  background: #e2e8f0;
+  padding: 2px 6px;
+  border-radius: 4px;
 }
 
 /* 功能介绍 */
 .features {
+  margin-top: 32px;
   display: flex;
   justify-content: space-around;
-  margin-bottom: 0.4rem;
+  text-align: center;
 }
 
 .feature {
-  text-align: center;
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 .featureIcon {
-  font-size: 0.6rem;
-  margin-bottom: 0.2rem;
-  height: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 4px;
 }
 
 .featureText {
-  font-size: 0.25rem;
-  color: #666;
-  line-height: 1.2;
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
 }
 
 /* 底部信息 */
 .footer {
-  position: absolute;
-  bottom: 0.4rem;
-  left: 0;
-  right: 0;
+  margin-top: 32px;
   text-align: center;
-  z-index: 2;
-}
-
-.footer p {
-  font-size: 0.25rem;
   color: rgba(255, 255, 255, 0.8);
-  margin: 0;
+  font-size: 12px;
+  position: relative;
+  z-index: 10;
 }
 
 /* 响应式设计 */
 @media (max-width: 480px) {
   .container {
-    padding: 0.3rem;
+    padding: 16px;
   }
   
   .loginCard {
-    padding: 0.6rem;
-    max-width: none;
+    padding: 24px;
+    max-width: 100%;
   }
   
   .title {
-    font-size: 0.5rem;
-  }
-  
-  .subtitle {
-    font-size: 0.3rem;
+    font-size: 24px;
   }
   
   .quickLoginButtons {
     flex-direction: column;
-    gap: 0.2rem;
   }
   
   .features {
-    flex-direction: column;
-    gap: 0.3rem;
+    margin-top: 24px;
   }
   
   .feature {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    text-align: left;
+    flex: 1;
   }
   
-  .featureIcon {
-    font-size: 0.5rem;
-    margin-bottom: 0;
-    height: auto;
+  .featureText {
+    font-size: 11px;
   }
-}
-
-/* 横屏适配 */
-@media (orientation: landscape) and (max-height: 500px) {
-  .container {
-    padding: 0.2rem;
-  }
-  
-  .loginCard {
-    padding: 0.4rem;
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-  
-  .header {
-    margin-bottom: 0.4rem;
-  }
-  
-  .features {
-    display: none;
-  }
-  
-  .footer {
-    display: none;
-  }
-}
-
-/* 加载状态 */
-.loginButton[disabled] {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-/* 错误状态 */
-.input.error {
-  border-color: #ff4757;
-  box-shadow: 0 0 0 0.05rem rgba(255, 71, 87, 0.2);
-}
-
-/* 成功状态 */
-.input.success {
-  border-color: #2ed573;
-  box-shadow: 0 0 0 0.05rem rgba(46, 213, 115, 0.2);
-}
-
-/* 动画效果 */
-.formGroup {
-  animation: fadeInUp 0.6s ease-out;
-  animation-fill-mode: both;
-}
-
-.formGroup:nth-child(1) {
-  animation-delay: 0.1s;
-}
-
-.formGroup:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.loginButton {
-  animation: fadeInUp 0.6s ease-out 0.3s both;
-}
-
-.quickLogin {
-  animation: fadeInUp 0.6s ease-out 0.4s both;
-}
-
-.loginTips {
-  animation: fadeInUp 0.6s ease-out 0.5s both;
-}
-
-.features {
-  animation: fadeInUp 0.6s ease-out 0.6s both;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(0.4rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 聚焦效果 */
-.input:focus-within {
-  transform: translateY(-0.025rem);
-}
-
-/* 按钮点击效果 */
-.quickButton:active,
-.loginButton:active {
-  transform: scale(0.98);
-}
-
-/* 深色模式支持 */
-@media (prefers-color-scheme: dark) {
-  .loginCard {
-    background: #1a1a1a;
-    color: white;
-  }
-  
-  .title {
-    color: white;
-  }
-  
-  .subtitle {
-    color: #ccc;
-  }
-  
-  .input {
-    background: #2a2a2a;
-    border-color: #444;
-    color: white;
-  }
-  
-  .loginTips {
-    background: #2a2a2a;
-  }
-  
-  .tipValue {
-    background: #444;
-    color: white;
-  }
-}
-
-
-.successMessage {
-  color: #07c160;
-  background-color: #f0f9eb;
-  padding: 10px;
-  border-radius: 4px;
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-.errorMessage {
-  color: #ee0a24;
-  background-color: #fef0f0;
-  padding: 10px;
-  border-radius: 4px;
-  margin-bottom: 15px;
-  text-align: center;
-}
-
-.formGroup {
-  margin-bottom: 15px;
 }

@@ -14,6 +14,8 @@ const Favorites = lazy(() => import('@/pages/Favorites'));
 const Profile = lazy(() => import('@/pages/Profile'));
 const Login = lazy(() => import('@/pages/Login'));
 const Wardrobe = lazy(() => import('@/pages/Wardrobe'));
+const Coze = lazy(() => import('@/pages/Coze'));
+const Search = lazy(() => import('@/pages/Search'));
 
 // 加载组件
 const Loading = () => (
@@ -83,6 +85,8 @@ function App() {
               }>
                 <Route path="/" element={<Navigate to="/home" replace />} />
                 <Route path="/home" element={<Home />} />
+                <Route path="/coze" element={<Coze />} />
+                <Route path="/search" element={<Search />} />
                 <Route path="/wardrobe" element={<Wardrobe />} />
                 <Route path="/discover" element={<Discover />} />
                 <Route path="/messages" element={<Messages />} />

@@ -9,11 +9,13 @@ const Login = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loginStatus, setLoginStatus] = useState(null);
-  const { login, isLogin } = useUserStore(); // 添加 isLogin 状态
+  const [isRegisterMode, setIsRegisterMode] = useState(false);
+  const { login, register, isLogin } = useUserStore();
   const navigate = useNavigate();
   const location = useLocation();
-  const loginAttemptRef = useRef(false); // 跟踪登录尝试
+  const loginAttemptRef = useRef(false);
 
   // 获取重定向路径
   const from = location.state?.from || '/home';
@@ -26,27 +28,40 @@ const Login = () => {
     }
   }, [isLogin, navigate, from]);
 
-  const handleLogin = async (values) => {
-    if (loginAttemptRef.current) return; // 防止重复提交
+  const handleSubmit = async (values) => {
+    if (loginAttemptRef.current) return;
     loginAttemptRef.current = true;
     
-    const { username, password } = values;
     setLoading(true);
     setLoginStatus(null);
     
     try {
-      // 手动验证表单
       await form.validateFields();
       
-      // 执行登录操作
-      await login({ username, password });
-      
-      // 不在这里跳转，由 useEffect 监听 isLogin 状态变化来处理跳转
-      setLoginStatus({ type: 'success', message: '登录成功' });
+      if (isRegisterMode) {
+        // 注册逻辑
+        const { username, password, confirmPassword } = values;
+        
+        if (password !== confirmPassword) {
+          throw new Error('两次输入的密码不一致');
+        }
+        
+        // 模拟注册API调用
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // 注册成功后自动登录
+        await login({ username, password });
+        setLoginStatus({ type: 'success', message: '注册成功，正在登录...' });
+      } else {
+        // 登录逻辑
+        const { username, password } = values;
+        await login({ username, password });
+        setLoginStatus({ type: 'success', message: '登录成功' });
+      }
     } catch (error) {
       setLoginStatus({ 
         type: 'error', 
-        message: error.message || '登录失败，请检查用户名和密码' 
+        message: error.message || (isRegisterMode ? '注册失败' : '登录失败，请检查用户名和密码')
       });
     } finally {
       setLoading(false);
@@ -57,12 +72,17 @@ const Login = () => {
   const handleQuickLogin = (username, password) => {
     form.setFieldsValue({ username, password });
     
-    // 手动触发表单验证
     form.validateFields()
-      .then(() => handleLogin({ username, password }))
+      .then(() => handleSubmit({ username, password }))
       .catch(() => {
         setLoginStatus({ type: 'error', message: '请正确填写表单' });
       });
+  };
+
+  const switchMode = () => {
+    setIsRegisterMode(!isRegisterMode);
+    setLoginStatus(null);
+    form.resetFields();
   };
 
   // 渲染状态消息
@@ -89,7 +109,7 @@ const Login = () => {
         <div className={styles.circle3}></div>
       </div>
 
-      {/* 登录表单 */}
+      {/* 登录/注册表单 */}
       <div className={styles.loginCard}>
         {/* Logo和标题 */}
         <div className={styles.header}>
@@ -97,16 +117,34 @@ const Login = () => {
             <div className={styles.logoIcon}>👗</div>
           </div>
           <h1 className={styles.title}>AI智能穿搭助手</h1>
-          <p className={styles.subtitle}>让AI为你打造专属时尚风格</p>
+          <p className={styles.subtitle}>
+            {isRegisterMode ? '创建账号，开启时尚之旅' : '让AI为你打造专属时尚风格'}
+          </p>
         </div>
 
         {/* 状态消息 */}
         {renderStatusMessage()}
 
-        {/* 登录表单 */}
+        {/* 模式切换 */}
+        <div className={styles.modeSwitch}>
+          <button 
+            className={`${styles.modeButton} ${!isRegisterMode ? styles.active : ''}`}
+            onClick={() => !isRegisterMode || switchMode()}
+          >
+            登录
+          </button>
+          <button 
+            className={`${styles.modeButton} ${isRegisterMode ? styles.active : ''}`}
+            onClick={() => isRegisterMode || switchMode()}
+          >
+            注册
+          </button>
+        </div>
+
+        {/* 表单 */}
         <Form
           form={form}
-          onFinish={handleLogin}
+          onFinish={handleSubmit}
           className={styles.form}
           validateTrigger="onBlur"
         >
@@ -153,6 +191,37 @@ const Login = () => {
             />
           </div>
 
+          {isRegisterMode && (
+            <div className={styles.formGroup}>
+              <Field
+                name="confirmPassword"
+                type={showConfirmPassword ? 'text' : 'password'}
+                placeholder="请再次确认密码"
+                leftIcon={<Lock />}
+                rightIcon={
+                  <div 
+                    className={styles.eyeIcon}
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {showConfirmPassword ? <EyeO /> : <ClosedEye />}
+                  </div>
+                }
+                className={styles.input}
+                rules={[
+                  { required: true, message: '请确认密码' },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue('password') === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(new Error('两次输入的密码不一致'));
+                    },
+                  }),
+                ]}
+              />
+            </div>
+          )}
+
           <Button
             type="primary"
             nativeType="submit"
@@ -160,42 +229,49 @@ const Login = () => {
             className={styles.loginButton}
             block
           >
-            {loading ? '登录中...' : '立即登录'}
+            {loading 
+              ? (isRegisterMode ? '注册中...' : '登录中...') 
+              : (isRegisterMode ? '立即注册' : '立即登录')
+            }
           </Button>
         </Form>
 
-        {/* 快速登录 */}
-        <div className={styles.quickLogin}>
-          <p className={styles.quickLoginTitle}>快速登录</p>
-          <div className={styles.quickLoginButtons}>
-            <Button
-              size="small"
-              className={styles.quickButton}
-              onClick={() => handleQuickLogin('admin', '123456')}
-            >
-              管理员账号
-            </Button>
-            <Button
-              size="small"
-              className={styles.quickButton}
-              onClick={() => handleQuickLogin('user', '123456')}
-            >
-              普通用户
-            </Button>
+        {/* 快速登录 - 仅在登录模式显示 */}
+        {!isRegisterMode && (
+          <div className={styles.quickLogin}>
+            <p className={styles.quickLoginTitle}>快速登录</p>
+            <div className={styles.quickLoginButtons}>
+              <Button
+                size="small"
+                className={styles.quickButton}
+                onClick={() => handleQuickLogin('admin', '123456')}
+              >
+                管理员账号
+              </Button>
+              <Button
+                size="small"
+                className={styles.quickButton}
+                onClick={() => handleQuickLogin('user', '123456')}
+              >
+                普通用户
+              </Button>
+            </div>
           </div>
-        </div>
+        )}
 
-        {/* 登录提示 */}
-        <div className={styles.loginTips}>
-          <div className={styles.tipItem}>
-            <span className={styles.tipLabel}>测试账号:</span>
-            <span className={styles.tipValue}>admin / 123456</span>
+        {/* 登录提示 - 仅在登录模式显示 */}
+        {!isRegisterMode && (
+          <div className={styles.loginTips}>
+            <div className={styles.tipItem}>
+              <span className={styles.tipLabel}>测试账号:</span>
+              <span className={styles.tipValue}>admin / 123456</span>
+            </div>
+            <div className={styles.tipItem}>
+              <span className={styles.tipLabel}>普通账号:</span>
+              <span className={styles.tipValue}>user / 123456</span>
+            </div>
           </div>
-          <div className={styles.tipItem}>
-            <span className={styles.tipLabel}>普通账号:</span>
-            <span className={styles.tipValue}>user / 123456</span>
-          </div>
-        </div>
+        )}
 
         {/* 功能介绍 */}
         <div className={styles.features}>

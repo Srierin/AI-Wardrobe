@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@react-vant/icons": "^0.1.0",
+    "@tailwindcss/vite": "^4.1.11",
     "axios": "^1.11.0",
     "lib-flexible": "^0.3.2",
     "openai": "^5.11.0",
@@ -18,6 +19,7 @@
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.7.1",
     "react-vant": "^3.3.5",
+    "tailwindcss": "^4.1.11",
     "zustand": "^5.0.7"
   },
   "devDependencies": {
@@ -31,6 +33,7 @@
     "globals": "^16.0.0",
     "jsonwebtoken": "^9.0.2",
     "jwt": "^0.2.0",
+    "mockjs": "^1.1.0",
     "vite": "^6.3.5",
     "vite-plugin-mock": "^3.0.2"
   }

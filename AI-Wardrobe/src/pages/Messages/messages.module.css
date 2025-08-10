@@ -1,44 +1,46 @@
 .container {
   min-height: 100vh;
-  background-color: #f5f5f5;
+  background-color: #f8f9ff;
   padding-bottom: 1.6rem;
-  /* 64px */
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 /* 顶部标题栏 */
 .header {
-  background: white;
-  padding: 0.3rem 0.4rem;
-  /* 12px 16px */
-  box-shadow: 0 0.05rem 0.2rem rgba(0, 0, 0, 0.1);
-  /* 0 2px 8px */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 0.8rem 0.8rem 1.2rem;
+  color: white;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 4px 12px rgba(118, 75, 162, 0.2);
+  position: relative;
+  z-index: 10;
 }
 
 .headerTop {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.3rem;
-  /* 12px */
+  margin-bottom: 0.8rem;
 }
 
 .title {
-  font-size: 0.5rem;
-  /* 20px */
-  font-weight: bold;
-  color: #333;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.5px;
 }
 
 .addIcon {
-  font-size: 0.5rem;
-  /* 20px */
-  color: #666;
+  font-size: 1.2rem;
+  color: white;
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: transform 0.3s ease;
 }
 
 .addIcon:hover {
-  color: #667eea;
+  transform: scale(1.1);
 }
 
 .searchContainer {
@@ -47,15 +49,19 @@
 
 .searchInput {
   width: 100%;
-  padding: 0.25rem 0.3rem 0.25rem 0.8rem;
-  /* 10px 12px 10px 32px */
+  padding: 0.7rem 1rem 0.7rem 2.8rem;
   border: none;
-  border-radius: 0.5rem;
-  /* 20px */
-  background-color: #f5f5f5;
-  font-size: 0.35rem;
-  /* 14px */
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
   color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.searchInput:focus {
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .searchInput::placeholder {
@@ -64,44 +70,49 @@
 
 .searchIcon {
   position: absolute;
-  left: 0.3rem;
-  /* 12px */
+  left: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #999;
-  font-size: 0.4rem;
-  /* 16px */
+  color: #667eea;
+  font-size: 1rem;
 }
 
 /* 标签页 */
 .tabsContainer {
   background: white;
-  border-bottom: 0.025rem solid #f0f0f0;
-  /* 1px */
+  border-bottom: 1px solid #f0f0f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 5;
 }
 
 .tabs {
   display: flex;
+  padding: 0 0.5rem;
 }
 
 .tab {
   flex: 1;
-  padding: 0.35rem 0;
-  /* 14px 0 */
+  padding: 0.9rem 0;
   text-align: center;
   background: none;
   border: none;
   color: #666;
-  font-size: 0.35rem;
-  /* 14px */
+  font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
   position: relative;
-  transition: color 0.2s ease;
+  transition: all 0.3s ease;
+}
+
+.tab:hover {
+  color: #667eea;
 }
 
 .tab.active {
   color: #667eea;
+  font-weight: 600;
 }
 
 .tab.active::after {
@@ -110,61 +121,75 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 0.6rem;
-  /* 24px */
-  height: 0.05rem;
-  /* 2px */
+  width: 2.5rem;
+  height: 3px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 0.025rem;
-  /* 1px */
+  border-radius: 3px;
+}
+
+/* 内容区域 */
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem 0.5rem 1rem;
 }
 
 /* 聊天列表 */
 .chatList {
-  padding: 0.2rem 0;
-  /* 8px 0 */
+  padding: 0.5rem 0;
 }
 
 .chatItem {
   background: white;
-  padding: 0.3rem 0.4rem;
-  /* 12px 16px */
-  border-bottom: 0.025rem solid #f5f5f5;
-  /* 1px */
+  padding: 0.9rem 1rem;
+  border-radius: 16px;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .chatItem:hover {
-  background-color: #f8f9fa;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.chatItem:last-child {
-  border-bottom: none;
+.chatItem.unread {
+  border-left: 4px solid #667eea;
 }
 
 .chatContent {
   display: flex;
   align-items: center;
-  gap: 0.3rem;
-  /* 12px */
+  gap: 0.9rem;
+}
+
+.avatarContainer {
+  position: relative;
+  flex-shrink: 0;
 }
 
 .avatar {
-  width: 1.2rem;
-  /* 48px */
-  height: 1.2rem;
-  /* 48px */
+  width: 3.2rem;
+  height: 3.2rem;
   border-radius: 50%;
-  background: linear-gradient(45deg, #ff6b6b, #feca57);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 0.4rem;
-  /* 16px */
-  font-weight: 600;
-  flex-shrink: 0;
+  object-fit: cover;
+  border: 2px solid white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.onlineIndicator {
+  position: absolute;
+  bottom: 0.2rem;
+  right: 0.2rem;
+  width: 0.8rem;
+  height: 0.8rem;
+  background-color: #4caf50;
+  border: 2px solid white;
+  border-radius: 50%;
+  z-index: 2;
 }
 
 .chatInfo {
@@ -176,20 +201,45 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.1rem;
-  /* 4px */
+  margin-bottom: 0.3rem;
+}
+
+.nameContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 .chatName {
-  font-size: 0.4rem;
-  /* 16px */
+  font-size: 1rem;
   font-weight: 600;
   color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 10rem;
+}
+
+.groupTag {
+  background-color: #e6f7ff;
+  color: #1890ff;
+  font-size: 0.7rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.officialTag {
+  background-color: #f6ffed;
+  color: #52c41a;
+  font-size: 0.7rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-weight: 500;
 }
 
 .chatTime {
-  font-size: 0.25rem;
-  /* 10px */
+  font-size: 0.75rem;
   color: #999;
   flex-shrink: 0;
 }
@@ -198,84 +248,72 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.5rem;
 }
 
 .lastMessage {
-  font-size: 0.35rem;
-  /* 14px */
+  font-size: 0.9rem;
   color: #666;
-  line-height: 1.3;
+  line-height: 1.4;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   flex: 1;
-  min-width: 0;
 }
 
 .unreadBadge {
-  background: #ff4757;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
   color: white;
-  font-size: 0.25rem;
-  /* 10px */
-  padding: 0.05rem 0.15rem;
-  /* 2px 6px */
-  border-radius: 0.25rem;
-  /* 10px */
-  min-width: 0.4rem;
-  /* 16px */
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+  min-width: 1.5rem;
   text-align: center;
   flex-shrink: 0;
-  margin-left: 0.2rem;
-  /* 8px */
 }
 
 /* 通知列表 */
 .notificationList {
-  padding: 0.2rem 0;
-  /* 8px 0 */
+  padding: 0.5rem 0;
 }
 
 .notificationCard {
   background: white;
-  margin: 0.2rem 0.4rem;
-  /* 8px 16px */
-  border-radius: 0.3rem;
-  /* 12px */
-  padding: 0.4rem;
-  /* 16px */
-  box-shadow: 0 0.05rem 0.2rem rgba(0, 0, 0, 0.1);
-  /* 0 2px 8px */
-  transition: all 0.2s ease;
+  border-radius: 16px;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
   cursor: pointer;
+  padding: 1.2rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .notificationCard:hover {
-  transform: translateY(-0.025rem);
-  /* -1px */
-  box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.15);
-  /* 0 4px 12px */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.notificationCard.unreadNotification {
+  border-left: 4px solid #667eea;
 }
 
 .notificationHeader {
   display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  /* 12px */
-  margin-bottom: 0.25rem;
-  /* 10px */
+  align-items: flex-start;
+  gap: 1rem;
 }
 
 .notificationIcon {
-  width: 0.8rem;
-  /* 32px */
-  height: 0.8rem;
-  /* 32px */
-  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.4rem;
-  /* 16px */
+  font-size: 1.2rem;
+  flex-shrink: 0;
 }
 
 .notificationIcon.system {
@@ -297,175 +335,137 @@
   flex: 1;
 }
 
-.notificationTitle {
-  font-size: 0.4rem;
-  /* 16px */
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 0.1rem;
-  /* 4px */
-}
-
-.notificationDesc {
-  font-size: 0.3rem;
-  /* 12px */
-  color: #666;
-  line-height: 1.4;
-}
-
-.notificationTime {
-  font-size: 0.25rem;
-  /* 10px */
-  color: #999;
-  margin-top: 0.15rem;
-  /* 6px */
-}
-
-.notificationMeta {
+.notificationTitleContainer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 0.25rem;
-  /* 10px */
-}
-
-.typeIcon {
-  font-size: 0.4rem;
-  /* 16px */
-}
-
-/* 空状态 */
-.emptyState {
-  text-align: center;
-  padding: 2rem 0.4rem;
-  /* 80px 16px */
-  color: #999;
-}
-
-.emptyIcon {
-  font-size: 1.5rem;
-  /* 60px */
+  gap: 0.5rem;
   margin-bottom: 0.4rem;
-  /* 16px */
 }
 
-.emptyText {
-  font-size: 0.35rem;
-  /* 14px */
-  line-height: 1.4;
+.notificationTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #333;
 }
 
-/* 在线状态指示器 */
-.onlineIndicator {
-  position: absolute;
-  bottom: 0.05rem;
-  /* 2px */
-  right: 0.05rem;
-  /* 2px */
-  width: 0.3rem;
-  /* 12px */
-  height: 0.3rem;
-  /* 12px */
-  background-color: #4caf50;
-  border: 0.05rem solid white;
-  /* 2px */
+.unreadDot {
+  width: 0.6rem;
+  height: 0.6rem;
+  background: #ff4757;
   border-radius: 50%;
 }
 
-.avatar {
-  position: relative;
+.notificationDesc {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 0.4rem;
 }
 
-/* 消息状态 */
-.messageStatus {
-  display: flex;
-  align-items: center;
-  gap: 0.1rem;
-  /* 4px */
-  margin-left: 0.2rem;
-  /* 8px */
-}
-
-.statusIcon {
-  font-size: 0.3rem;
-  /* 12px */
+.notificationTime {
+  font-size: 0.8rem;
   color: #999;
 }
 
-.statusIcon.sent {
-  color: #2196f3;
-}
-
-.statusIcon.delivered {
-  color: #4caf50;
-}
-
-.statusIcon.read {
-  color: #667eea;
-}
-
-/* 置顶聊天 */
-.chatItem.pinned {
-  background-color: #f8f9ff;
-}
-
-.chatItem.pinned::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
+/* 快捷操作按钮容器 */
+.actionButtonsContainer {
+  padding: 1rem;
+  background: white;
+  border-top: 1px solid #f0f0f0;
+  position: sticky;
   bottom: 0;
-  width: 0.1rem;
-  /* 4px */
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  z-index: 5;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
 }
 
-.chatItem {
-  position: relative;
+.primaryButton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  border: none !important;
+  border-radius: 50px !important;
+  height: 2.8rem !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 10px rgba(118, 75, 162, 0.3) !important;
 }
 
-/* 滑动操作 */
-.chatItem {
-  transition: transform 0.2s ease;
+.secondaryButton {
+  border-radius: 50px !important;
+  height: 2.8rem !important;
+  font-weight: 500 !important;
+  border-color: #667eea !important;
+  color: #667eea !important;
 }
 
-.chatItem.swiped {
-  transform: translateX(-2rem);
-  /* -80px */
+/* 底部间距 */
+.bottomSpacer {
+  height: 1rem;
 }
 
-.swipeActions {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 2rem;
-  /* 80px */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #ff4757;
-  color: white;
-  font-size: 0.4rem;
-  /* 16px */
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .header {
+    padding: 0.7rem 0.7rem 1rem;
+  }
+  
+  .title {
+    font-size: 1.1rem;
+  }
+  
+  .searchInput {
+    padding: 0.6rem 0.9rem 0.6rem 2.6rem;
+    font-size: 0.85rem;
+  }
+  
+  .avatar {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+  
+  .chatName {
+    font-size: 0.95rem;
+    max-width: 8rem;
+  }
+  
+  .lastMessage {
+    font-size: 0.85rem;
+  }
+  
+  .notificationCard {
+    padding: 1rem;
+  }
+  
+  .notificationHeader {
+    gap: 0.8rem;
+  }
+  
+  .notificationIcon {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1.1rem;
+  }
+  
+  .notificationTitle {
+    font-size: 0.95rem;
+  }
+  
+  .notificationDesc {
+    font-size: 0.85rem;
+  }
 }
 
 /* 动画效果 */
-@keyframes slideInLeft {
+@keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateX(-0.5rem);
-    /* -20px */
+    transform: translateY(10px);
   }
-
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
 
 .chatItem {
-  animation: slideInLeft 0.3s ease-out;
+  animation: fadeIn 0.4s ease-out;
 }
 
 .chatItem:nth-child(2) {
@@ -480,48 +480,14 @@
   animation-delay: 0.15s;
 }
 
-.chatItem:nth-child(5) {
-  animation-delay: 0.2s;
+.notificationCard {
+  animation: fadeIn 0.4s ease-out;
 }
 
-/* 搜索高亮 */
-.searchHighlight {
-  background-color: #fff3cd;
-  color: #856404;
-  padding: 0 0.05rem;
-  /* 0 2px */
-  border-radius: 0.05rem;
-  /* 2px */
+.notificationCard:nth-child(2) {
+  animation-delay: 0.05s;
 }
 
-/* 快捷操作按钮容器 */
-.actionButtonsContainer {
-  padding: 0.4rem;
-}
-
-/* 响应式设计 */
-@media (max-width: 480px) {
-  .chatContent {
-    gap: 0.25rem;
-    /* 10px */
-  }
-
-  .avatar {
-    width: 1rem;
-    /* 40px */
-    height: 1rem;
-    /* 40px */
-    font-size: 0.35rem;
-    /* 14px */
-  }
-
-  .chatName {
-    font-size: 0.35rem;
-    /* 14px */
-  }
-
-  .lastMessage {
-    font-size: 0.3rem;
-    /* 12px */
-  }
+.notificationCard:nth-child(3) {
+  animation-delay: 0.1s;
 }

@@ -94,7 +94,7 @@ const Profile = () => {
       if (result.code === 0) {
         setUserInfo(prev => ({ ...prev, avatar: result.data.imageUrl }));
         localStorage.setItem('userAvatar', result.data.imageUrl);
-        updateAvatar(newAvatar);
+        updateAvatar(result.data.imageUrl);
         setToastMessage('头像生成成功！');
         setShowToast(true);
       } else {

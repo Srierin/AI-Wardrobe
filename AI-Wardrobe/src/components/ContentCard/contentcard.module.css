@@ -1,0 +1,166 @@
+/* 内容卡片样式 */
+.contentCard {
+  background: white;
+  border-radius: 0.3rem; /* 12px */
+  overflow: hidden;
+  box-shadow: 0 0.05rem 0.3rem rgba(0, 0, 0, 0.1); /* 0 2px 12px */
+  transition: all 0.2s ease;
+  cursor: pointer;
+  margin-bottom: 0.3rem; /* 12px */
+  width: 100%;
+}
+
+.contentCard:hover {
+  transform: translateY(-0.05rem); /* -2px */
+  box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.15); /* 0 4px 20px */
+}
+
+.contentImage {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.authorInfo {
+  position: absolute;
+  top: 0.2rem; /* 8px */
+  right: 0.2rem; /* 8px */
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 0.1rem 0.2rem; /* 4px 8px */
+  border-radius: 0.25rem; /* 10px */
+  font-size: 0.25rem; /* 10px */
+  z-index: 1;
+}
+
+.contentInfo {
+  padding: 0.3rem; /* 12px */
+}
+
+.contentTitle {
+  font-size: 0.35rem; /* 14px */
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.15rem; /* 6px */
+  line-height: 1.3;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.contentDesc {
+  font-size: 0.3rem; /* 12px */
+  color: #666;
+  line-height: 1.4;
+  margin-bottom: 0.2rem; /* 8px */
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.contentTags {
+  display: flex;
+  gap: 0.1rem; /* 4px */
+  margin-bottom: 0.25rem; /* 10px */
+  flex-wrap: wrap;
+}
+
+.contentTag {
+  background-color: #f0f0f0;
+  color: #666;
+  padding: 0.05rem 0.15rem; /* 2px 6px */
+  border-radius: 0.25rem; /* 10px */
+  font-size: 0.2rem; /* 8px */
+}
+
+.contentTag.summer {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.contentTag.fresh {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.contentTag.casual {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.contentTag.office {
+  background-color: #e2e3e5;
+  color: #383d41;
+}
+
+/* 互动按钮 */
+.actionBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.25rem; /* 10px */
+  border-top: 0.025rem solid #f0f0f0; /* 1px */
+}
+
+.actionLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem; /* 16px */
+}
+
+.actionItem {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem; /* 4px */
+  color: #999;
+  font-size: 0.3rem; /* 12px */
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.actionItem:hover {
+  color: #667eea;
+}
+
+.actionIcon {
+  font-size: 0.35rem; /* 14px */
+}
+
+.followButton {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.15rem 0.3rem; /* 6px 12px */
+  border-radius: 0.25rem; /* 10px */
+  font-size: 0.25rem; /* 10px */
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.followButton:hover {
+  transform: translateY(-0.025rem); /* -1px */
+  box-shadow: 0 0.1rem 0.3rem rgba(102, 126, 234, 0.3); /* 0 4px 12px */
+}
+
+.followButton.following {
+  background: #f0f0f0;
+  color: #666;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .contentImage {
+    height: 3rem; /* 120px */
+  }
+}

@@ -16,6 +16,29 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.3rem; /* 12px */
+  position: relative;
+}
+
+.backButton {
+  background: none;
+  border: none;
+  color: #667eea;
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.backButton:hover {
+  background: #f8f9ff;
+  color: #5a67d8;
+}
+
+.backButton:active {
+  transform: scale(0.95);
 }
 
 .title {

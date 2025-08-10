@@ -1,236 +1,69 @@
-.layout {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background-color: #f5f5f5;
+.mainLayout {
+  min-height: 100vh;
+  background: #f8fafc;
 }
 
-/* 主内容区域 */
 .content {
-  flex: 1;
-  overflow: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  padding-bottom: 80px;
+  min-height: calc(100vh - 80px);
 }
 
-/* 底部导航栏容器 */
-.tabbarContainer {
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
   background: white;
-  border-top: 0.025rem solid #e0e0e0; /* 1px */
-  box-shadow: 0 -0.05rem 0.3rem rgba(0, 0, 0, 0.1); /* 0 -2px 12px */
-  position: relative;
-  z-index: 100;
+  border-top: 1px solid #e5e7eb;
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.05);
 }
 
-/* 自定义底部导航栏样式 */
-.customTabbar {
+.navContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.navItems {
   display: flex;
-  height: 1.25rem; /* 50px */
-  background: white;
-  position: relative;
+  align-items: center;
+  justify-content: space-around;
+  padding: 8px 0;
 }
 
-.tabItem {
-  flex: 1;
+.navItem {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 0.15rem 0.1rem; /* 6px 4px */
-  cursor: pointer;
-  transition: all 0.2s ease;
-  position: relative;
-  background: none;
+  gap: 4px;
+  height: auto;
+  padding: 8px 12px;
+  background: transparent;
   border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #6b7280;
+  border-radius: 8px;
+  min-width: 60px;
 }
 
-.tabItem:hover {
-  background-color: rgba(102, 126, 234, 0.05);
+.navItem:hover {
+  color: #4f46e5;
+  background: #eef2ff;
 }
 
-.tabIcon {
-  font-size: 0.5rem; /* 20px */
-  margin-bottom: 0.1rem; /* 4px */
-  transition: all 0.2s ease;
+.navItem.active {
+  color: #4f46e5;
+  background: #eef2ff;
 }
 
-.tabText {
-  font-size: 0.25rem; /* 10px */
+.navIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.navLabel {
+  font-size: 12px;
   font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-/* 激活状态 */
-.tabItem.active .tabIcon {
-  color: #667eea;
-  transform: scale(1.1);
-}
-
-.tabItem.active .tabText {
-  color: #667eea;
-  font-weight: 600;
-}
-
-.tabItem:not(.active) .tabIcon {
-  color: #999;
-}
-
-.tabItem:not(.active) .tabText {
-  color: #999;
-}
-
-/* 激活指示器 */
-.tabItem.active::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0.6rem; /* 24px */
-  height: 0.05rem; /* 2px */
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 0.025rem; /* 1px */
-}
-
-/* 徽章样式 */
-.badge {
-  position: absolute;
-  top: 0.05rem; /* 2px */
-  right: 0.3rem; /* 12px */
-  background: #ff4757;
-  color: white;
-  font-size: 0.2rem; /* 8px */
-  padding: 0.05rem 0.1rem; /* 2px 4px */
-  border-radius: 0.2rem; /* 8px */
-  min-width: 0.3rem; /* 12px */
-  text-align: center;
-  line-height: 1;
-}
-
-.badge.dot {
-  width: 0.15rem; /* 6px */
-  height: 0.15rem; /* 6px */
-  border-radius: 50%;
-  padding: 0;
-  top: 0.1rem; /* 4px */
-  right: 0.35rem; /* 14px */
-}
-
-/* 安全区域适配 */
-.tabbarContainer {
-  padding-bottom: env(safe-area-inset-bottom);
-}
-
-/* 响应式设计 */
-@media (max-width: 480px) {
-  .tabIcon {
-    font-size: 0.45rem; /* 18px */
-  }
-  
-  .tabText {
-    font-size: 0.2rem; /* 8px */
-  }
-  
-  .customTabbar {
-    height: 1.2rem; /* 48px */
-  }
-}
-
-/* 动画效果 */
-@keyframes tabSwitch {
-  0% {
-    transform: scale(0.9);
-    opacity: 0.7;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.tabItem.active .tabIcon {
-  animation: tabSwitch 0.3s ease-out;
-}
-
-/* 点击反馈 */
-.tabItem:active {
-  transform: scale(0.95);
-}
-
-/* 毛玻璃效果（可选） */
-.tabbarContainer.blur {
-  backdrop-filter: blur(0.2rem); /* 8px */
-  -webkit-backdrop-filter: blur(0.2rem); /* 8px */
-  background: rgba(255, 255, 255, 0.9);
-}
-
-/* 深色模式支持 */
-@media (prefers-color-scheme: dark) {
-  .tabbarContainer {
-    background: #1a1a1a;
-    border-top-color: #333;
-  }
-  
-  .customTabbar {
-    background: #1a1a1a;
-  }
-  
-  .tabItem:hover {
-    background-color: rgba(102, 126, 234, 0.1);
-  }
-  
-  .tabItem:not(.active) .tabIcon,
-  .tabItem:not(.active) .tabText {
-    color: #666;
-  }
-  
-  .tabbarContainer.blur {
-    background: rgba(26, 26, 26, 0.9);
-  }
-}
-
-/* 横屏适配 */
-@media (orientation: landscape) and (max-height: 500px) {
-  .customTabbar {
-    height: 1rem; /* 40px */
-  }
-  
-  .tabIcon {
-    font-size: 0.4rem; /* 16px */
-    margin-bottom: 0.05rem; /* 2px */
-  }
-  
-  .tabText {
-    font-size: 0.2rem; /* 8px */
-  }
-}
-
-/* 无障碍支持 */
-.tabItem:focus {
-  outline: 0.05rem solid #667eea; /* 2px */
-  outline-offset: 0.05rem; /* 2px */
-}
-
-.tabItem:focus:not(:focus-visible) {
-  outline: none;
-}
-
-/* 触摸优化 */
-.tabItem {
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-}
-
-/* 滚动条隐藏 */
-.content {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.content::-webkit-scrollbar {
-  display: none;
 }

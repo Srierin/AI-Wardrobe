@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './messages.module.css';
 import {
   Search,
@@ -16,13 +16,16 @@ import {
 const Messages = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [searchValue, setSearchValue] = useState('');
+  
+  // 使用可靠的DiceBear头像API
+  const generateAvatar = (name, seed) => 
+    `https://api.dicebear.com/7.x/miniavs/svg?seed=${seed || name}`;
 
   // 聊天列表数据
   const chatList = [
     {
       id: 1,
       name: '张小明',
-      avatar: 'https://via.placeholder.com/50x50/FF6B6B/white?text=张',
       lastMessage: '今天天气真不错，要不要一起出去走走？',
       time: '10:30',
       unread: 2,
@@ -31,7 +34,6 @@ const Messages = () => {
     {
       id: 2,
       name: '李小红',
-      avatar: 'https://via.placeholder.com/50x50/4ECDC4/white?text=李',
       lastMessage: '好的，我知道了，谢谢你的提醒',
       time: '09:15',
       unread: 0,
@@ -40,7 +42,6 @@ const Messages = () => {
     {
       id: 3,
       name: '工作群',
-      avatar: 'https://via.placeholder.com/50x50/45B7D1/white?text=群',
       lastMessage: '王经理: 明天的会议改到下午3点',
       time: '昨天',
       unread: 5,
@@ -50,7 +51,6 @@ const Messages = () => {
     {
       id: 4,
       name: '客服小助手',
-      avatar: 'https://via.placeholder.com/50x50/96CEB4/white?text=客',
       lastMessage: '您好，有什么可以帮助您的吗？',
       time: '昨天',
       unread: 1,
@@ -90,12 +90,16 @@ const Messages = () => {
   const renderChatItem = (item) => (
     <div
       key={item.id}
-      className={styles.chatItem}
+      className={`${styles.chatItem} ${item.unread > 0 ? styles.unread : ''}`}
       onClick={() => console.log('打开聊天', item.id)}
     >
       <div className={styles.chatContent}>
-        <div className={styles.avatar}>
-          {item.name.charAt(0)}
+        <div className={styles.avatarContainer}>
+          <img 
+            src={generateAvatar(item.name, item.id)} 
+            alt={item.name} 
+            className={styles.avatar}
+          />
           {item.online && (
             <div className={styles.onlineIndicator}></div>
           )}
@@ -103,13 +107,13 @@ const Messages = () => {
 
         <div className={styles.chatInfo}>
           <div className={styles.chatHeader}>
-            <div className="flex items-center space-x-2">
+            <div className={styles.nameContainer}>
               <h4 className={styles.chatName}>{item.name}</h4>
               {item.isGroup && (
-                <span className="text-xs bg-blue-100 text-blue-600 px-1 rounded">群</span>
+                <span className={styles.groupTag}>群</span>
               )}
               {item.isOfficial && (
-                <span className="text-xs bg-green-100 text-green-600 px-1 rounded">官方</span>
+                <span className={styles.officialTag}>官方</span>
               )}
             </div>
             <span className={styles.chatTime}>{item.time}</span>
@@ -126,24 +130,20 @@ const Messages = () => {
   );
 
   const renderNotificationItem = (item) => (
-    <div key={item.id} className={styles.notificationCard}>
-      <div className="p-4">
-        <div className={styles.notificationHeader}>
-          <div className={`${styles.notificationIcon} ${styles[item.type]}`}>
-            {item.type === 'system' && <SettingO />}
-            {item.type === 'activity' && <Bell />}
-            {item.type === 'social' && <ChatO />}
+    <div key={item.id} className={`${styles.notificationCard} ${!item.read ? styles.unreadNotification : ''}`}>
+      <div className={styles.notificationHeader}>
+        <div className={`${styles.notificationIcon} ${styles[item.type]}`}>
+          {item.type === 'system' && <SettingO />}
+          {item.type === 'activity' && <Bell />}
+          {item.type === 'social' && <ChatO />}
+        </div>
+        <div className={styles.notificationInfo}>
+          <div className={styles.notificationTitleContainer}>
+            <h4 className={styles.notificationTitle}>{item.title}</h4>
+            {!item.read && <div className={styles.unreadDot}></div>}
           </div>
-          <div className={styles.notificationInfo}>
-            <div className="flex items-center space-x-2 mb-1">
-              <h4 className={styles.notificationTitle}>{item.title}</h4>
-              {!item.read && (
-                <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-              )}
-            </div>
-            <p className={styles.notificationDesc}>{item.content}</p>
-            <span className={styles.notificationTime}>{item.time}</span>
-          </div>
+          <p className={styles.notificationDesc}>{item.content}</p>
+          <span className={styles.notificationTime}>{item.time}</span>
         </div>
       </div>
     </div>
@@ -188,7 +188,7 @@ const Messages = () => {
       </div>
 
       {/* 内容区域 */}
-      <div className="flex-1">
+      <div className={styles.content}>
         {activeTab === 0 ? (
           // 聊天列表
           <div className={styles.chatList}>
@@ -206,10 +206,10 @@ const Messages = () => {
       {activeTab === 0 && (
         <div className={styles.actionButtonsContainer}>
           <Space size={12} className="w-full">
-            <Button type="primary" block icon={<AddO />}>
+            <Button type="primary" block icon={<AddO />} className={styles.primaryButton}>
               发起聊天
             </Button>
-            <Button plain block>
+            <Button plain block className={styles.secondaryButton}>
               创建群聊
             </Button>
           </Space>
@@ -217,7 +217,7 @@ const Messages = () => {
       )}
 
       {/* 底部间距 */}
-      <div className="h-4"></div>
+      <div className={styles.bottomSpacer}></div>
     </div>
   );
 };
