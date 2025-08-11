@@ -256,7 +256,7 @@ const Profile = () => {
       {/* 退出登录 */}
       <div className={styles.logoutSection}>
         <button className={styles.logoutButton} onClick={handleLogout}>
-          <Edit size={16} style={{ marginRight: '8px' }} />
+          {/* <Edit size={16} style={{ marginRight: '8px' }} /> */}
           退出登录
         </button>
       </div>

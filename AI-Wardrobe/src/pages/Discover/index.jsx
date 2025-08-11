@@ -107,16 +107,6 @@ const Discover = () => {
         <div className={styles.headerTop}>
           <h1 className={styles.title}>发现</h1>
         </div>
-        {/* <div className={styles.searchContainer}>
-          <Search
-            value={searchValue}
-            onChange={setSearchValue}
-            placeholder="搜索穿搭灵感、时尚资讯..."
-            shape="round"
-            leftIcon={<SearchIcon className={styles.searchIcon} />}
-            className={styles.searchInput}
-          />
-        </div> */}
       </div> 
       
       {/* 分类标签 */}

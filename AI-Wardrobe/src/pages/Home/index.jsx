@@ -31,7 +31,7 @@ const Home = () => {
       weather: '晴天',
       temperature: '28°C',
       tags: ['夏装', '清爽'],
-      image:'https://img0.baidu.com/it/u=4262643031,2082460034&fm=253&app=138&f=JPEG?w=800&h=1731'
+      image:'https://img0.baidu.com/it/u=3204066330,4111729466&fm=253&app=138&f=JPEG?w=800&h=1087'
     },
     {
       id: 2,
@@ -116,9 +116,9 @@ const Home = () => {
         <div className={styles.section}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>今日穿搭推荐</h2>
-            <button className={styles.moreButton}>更多推荐</button>
+            <button className={styles.moreButton} onClick={() => navigate('/text')}>更多推荐</button>
           </div>
-          <div className={styles.outfitGrid}>
+          <div className={styles.outfitGrid} >
             {outfitRecommendations.map((outfit) => (
               <div key={outfit.id} className={styles.outfitCard}>
                 <div className={styles.outfitImage}>
@@ -159,21 +159,21 @@ const Home = () => {
               <h3 className={styles.featureTitle}>AI搭配</h3>
               <p className={styles.featureDesc}>智能推荐个性化穿搭</p>
             </div>
-            <div className={styles.featureCard}>
+            <div className={styles.featureCard} onClick={() => navigate('/text')}>
               <div className={`${styles.featureIcon} ${styles.weather}`}>
                 <WarningO />
               </div>
               <h3 className={styles.featureTitle}>天气穿搭</h3>
               <p className={styles.featureDesc}>根据天气推荐合适搭配</p>
             </div>
-            <div className={styles.featureCard}>
+            <div className={styles.featureCard} onClick={() => navigate('/text')}>
               <div className={`${styles.featureIcon} ${styles.style}`}>
                 <UserO />
               </div>
               <h3 className={styles.featureTitle}>风格测试</h3>
               <p className={styles.featureDesc}>发现你的专属风格</p>
             </div>
-            <div className={styles.featureCard}>
+            <div className={styles.featureCard} onClick={() => navigate('/text')}>
               <div className={`${styles.featureIcon} ${styles.shopping}`}>
                 <ShopO />
               </div>
@@ -187,7 +187,7 @@ const Home = () => {
         <div className={styles.section}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>搭配灵感</h2>
-            <button className={styles.moreButton}>查看更多</button>
+            <button className={styles.moreButton} onClick={() => navigate('/text')}>查看更多</button>
           </div>
           <div className={styles.inspirationList}>
             {inspirationData.map((item) => (

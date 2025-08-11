@@ -12,10 +12,11 @@ import {
   SettingO,
   AddO
 } from '@react-vant/icons';
+import { useNavigate } from'react-router-dom';
 
 const Messages = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const [searchValue, setSearchValue] = useState('');
+  const navigate = useNavigate();
   
   // 使用可靠的DiceBear头像API
   const generateAvatar = (name, seed) => 
@@ -157,7 +158,7 @@ const Messages = () => {
           <h1 className={styles.title}>消息</h1>
           <AddO className={styles.addIcon} />
         </div>
-        <div className={styles.searchContainer}>
+        {/* <div className={styles.searchContainer}>
           <Search
             value={searchValue}
             onChange={setSearchValue}
@@ -166,7 +167,7 @@ const Messages = () => {
             leftIcon={<SearchIcon className={styles.searchIcon} />}
             className={styles.searchInput}
           />
-        </div>
+        </div> */}
       </div>
 
       {/* 标签页 */}
@@ -206,10 +207,10 @@ const Messages = () => {
       {activeTab === 0 && (
         <div className={styles.actionButtonsContainer}>
           <Space size={12} className="w-full">
-            <Button type="primary" block icon={<AddO />} className={styles.primaryButton}>
+            <Button type="primary" block icon={<AddO />} className={styles.primaryButton} onClick={() => navigate('/text')}>
               发起聊天
             </Button>
-            <Button plain block className={styles.secondaryButton}>
+            <Button plain block className={styles.secondaryButton} onClick={() => navigate('/text')}>
               创建群聊
             </Button>
           </Space>

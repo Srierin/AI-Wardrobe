@@ -1,0 +1,49 @@
+/* 添加以下新样式到原有样式文件中 */
+
+.resultsContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.95);
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.developmentMessage {
+  text-align: center;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 80%;
+  animation: fadeIn 0.5s ease;
+}
+
+.developmentMessage h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.developmentMessage p {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.tip {
+  font-size: 14px !important;
+  color: #999 !important;
+  margin-top: 24px !important;
+  font-style: italic;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

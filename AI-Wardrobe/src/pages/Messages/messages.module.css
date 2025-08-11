@@ -1,7 +1,9 @@
+/* message.module.css (已根据 profile.module.css 调整大小) */
+
 .container {
   min-height: 100vh;
   background-color: #f8f9ff;
-  padding-bottom: 1.6rem;
+  padding-bottom: 1.6rem; /* 保持与profile页面一致的底部间距 */
   display: flex;
   flex-direction: column;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -10,10 +12,10 @@
 /* 顶部标题栏 */
 .header {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 0.8rem 0.8rem 1.2rem;
+  padding: 0.4rem 0.4rem 0.8rem; /* 调整内边距以匹配profile页 */
   color: white;
-  border-radius: 0 0 20px 20px;
-  box-shadow: 0 4px 12px rgba(118, 75, 162, 0.2);
+  border-radius: 0 0 12px 12px; /* 调整圆角大小 */
+  box-shadow: 0 2px 8px rgba(118, 75, 162, 0.2);
   position: relative;
   z-index: 10;
 }
@@ -22,18 +24,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.4rem; /* 调整间距 */
 }
 
 .title {
-  font-size: 1.2rem;
+  font-size: 0.6rem; /* 调整标题字体大小 */
   font-weight: 700;
   color: white;
   letter-spacing: 0.5px;
 }
 
 .addIcon {
-  font-size: 1.2rem;
+  font-size: 0.6rem; /* 调整图标大小 */
   color: white;
   cursor: pointer;
   transition: transform 0.3s ease;
@@ -47,21 +49,22 @@
   position: relative;
 }
 
+/* 调整搜索框样式以匹配整体风格 */
 .searchInput {
   width: 100%;
-  padding: 0.7rem 1rem 0.7rem 2.8rem;
+  padding: 0.35rem 0.5rem 0.35rem 1.4rem; /* 调整内边距 */
   border: none;
-  border-radius: 50px;
+  border-radius: 25px; /* 调整圆角 */
   background-color: rgba(255, 255, 255, 0.9);
-  font-size: 0.9rem;
+  font-size: 0.4rem; /* 调整字体大小 */
   color: #333;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
 .searchInput:focus {
   background-color: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .searchInput::placeholder {
@@ -70,18 +73,18 @@
 
 .searchIcon {
   position: absolute;
-  left: 1rem;
+  left: 0.5rem; /* 调整图标位置 */
   top: 50%;
   transform: translateY(-50%);
   color: #667eea;
-  font-size: 1rem;
+  font-size: 0.5rem; /* 调整图标大小 */
 }
 
 /* 标签页 */
 .tabsContainer {
   background: white;
   border-bottom: 1px solid #f0f0f0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 5;
@@ -89,17 +92,17 @@
 
 .tabs {
   display: flex;
-  padding: 0 0.5rem;
+  padding: 0 0.25rem;
 }
 
 .tab {
   flex: 1;
-  padding: 0.9rem 0;
+  padding: 0.45rem 0; /* 调整内边距 */
   text-align: center;
   background: none;
   border: none;
   color: #666;
-  font-size: 0.95rem;
+  font-size: 0.45rem; /* 调整字体大小 */
   font-weight: 500;
   cursor: pointer;
   position: relative;
@@ -121,30 +124,30 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 2.5rem;
-  height: 3px;
+  width: 1.5rem; /* 调整指示器宽度 */
+  height: 2px; /* 调整指示器高度 */
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 /* 内容区域 */
 .content {
   flex: 1;
   overflow-y: auto;
-  padding: 0.5rem 0.5rem 1rem;
+  padding: 0.25rem 0.25rem 0.5rem;
 }
 
 /* 聊天列表 */
 .chatList {
-  padding: 0.5rem 0;
+  padding: 0.25rem 0;
 }
 
 .chatItem {
   background: white;
-  padding: 0.9rem 1rem;
-  border-radius: 16px;
-  margin-bottom: 0.8rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 0.45rem 0.5rem; /* 调整内边距 */
+  border-radius: 8px; /* 调整圆角 */
+  margin-bottom: 0.4rem; /* 调整间距 */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
@@ -152,18 +155,18 @@
 }
 
 .chatItem:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .chatItem.unread {
-  border-left: 4px solid #667eea;
+  border-left: 2px solid #667eea; /* 调整边框宽度 */
 }
 
 .chatContent {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: 0.45rem; /* 调整间距 */
 }
 
 .avatarContainer {
@@ -172,22 +175,22 @@
 }
 
 .avatar {
-  width: 3.2rem;
-  height: 3.2rem;
+  width: 2rem; /* 匹配profile页头像大小 */
+  height: 2rem; /* 匹配profile页头像大小 */
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .onlineIndicator {
   position: absolute;
-  bottom: 0.2rem;
-  right: 0.2rem;
-  width: 0.8rem;
-  height: 0.8rem;
+  bottom: 0.1rem;
+  right: 0.1rem;
+  width: 0.4rem; /* 调整大小 */
+  height: 0.4rem; /* 调整大小 */
   background-color: #4caf50;
-  border: 2px solid white;
+  border: 1px solid white;
   border-radius: 50%;
   z-index: 2;
 }
@@ -201,45 +204,45 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.15rem; /* 调整间距 */
 }
 
 .nameContainer {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.2rem;
 }
 
 .chatName {
-  font-size: 1rem;
+  font-size: 0.5rem; /* 匹配profile页用户名大小 */
   font-weight: 600;
   color: #333;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 10rem;
+  max-width: 5rem; /* 调整最大宽度 */
+}
+
+.groupTag,
+.officialTag {
+  font-size: 0.3rem; /* 调整标签字体大小 */
+  padding: 0.05rem 0.2rem;
+  border-radius: 2px;
+  font-weight: 500;
 }
 
 .groupTag {
   background-color: #e6f7ff;
   color: #1890ff;
-  font-size: 0.7rem;
-  padding: 0.1rem 0.4rem;
-  border-radius: 4px;
-  font-weight: 500;
 }
 
 .officialTag {
   background-color: #f6ffed;
   color: #52c41a;
-  font-size: 0.7rem;
-  padding: 0.1rem 0.4rem;
-  border-radius: 4px;
-  font-weight: 500;
 }
 
 .chatTime {
-  font-size: 0.75rem;
+  font-size: 0.35rem; /* 调整字体大小 */
   color: #999;
   flex-shrink: 0;
 }
@@ -248,11 +251,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 
 .lastMessage {
-  font-size: 0.9rem;
+  font-size: 0.4rem; /* 调整字体大小 */
   color: #666;
   line-height: 1.4;
   overflow: hidden;
@@ -264,55 +267,55 @@
 .unreadBadge {
   background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
   color: white;
-  font-size: 0.75rem;
+  font-size: 0.35rem; /* 调整字体大小 */
   font-weight: 600;
-  padding: 0.15rem 0.5rem;
-  border-radius: 20px;
-  min-width: 1.5rem;
+  padding: 0.1rem 0.25rem;
+  border-radius: 10px;
+  min-width: 0.75rem;
   text-align: center;
   flex-shrink: 0;
 }
 
 /* 通知列表 */
 .notificationList {
-  padding: 0.5rem 0;
+  padding: 0.25rem 0;
 }
 
 .notificationCard {
   background: white;
-  border-radius: 16px;
-  margin-bottom: 0.8rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 8px; /* 调整圆角 */
+  margin-bottom: 0.4rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   cursor: pointer;
-  padding: 1.2rem;
+  padding: 0.6rem; /* 调整内边距 */
   position: relative;
   overflow: hidden;
 }
 
 .notificationCard:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
 }
 
 .notificationCard.unreadNotification {
-  border-left: 4px solid #667eea;
+  border-left: 2px solid #667eea;
 }
 
 .notificationHeader {
   display: flex;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 0.5rem; /* 调整间距 */
 }
 
 .notificationIcon {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 12px;
+  width: 1.5rem; /* 调整图标容器大小 */
+  height: 1.5rem;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 0.6rem; /* 调整图标大小 */
   flex-shrink: 0;
 }
 
@@ -338,58 +341,61 @@
 .notificationTitleContainer {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.4rem;
+  gap: 0.25rem;
+  margin-bottom: 0.2rem;
 }
 
 .notificationTitle {
-  font-size: 1rem;
+  font-size: 0.5rem; /* 调整标题字体大小 */
   font-weight: 700;
   color: #333;
 }
 
 .unreadDot {
-  width: 0.6rem;
-  height: 0.6rem;
+  width: 0.3rem; /* 调整大小 */
+  height: 0.3rem;
   background: #ff4757;
   border-radius: 50%;
 }
 
 .notificationDesc {
-  font-size: 0.9rem;
+  font-size: 0.4rem; /* 调整字体大小 */
   color: #666;
   line-height: 1.5;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.2rem;
 }
 
 .notificationTime {
-  font-size: 0.8rem;
+  font-size: 0.35rem; /* 调整字体大小 */
   color: #999;
 }
 
 /* 快捷操作按钮容器 */
 .actionButtonsContainer {
-  padding: 1rem;
+  padding: 0.5rem; /* 调整内边距 */
   background: white;
   border-top: 1px solid #f0f0f0;
   position: sticky;
   bottom: 0;
   z-index: 5;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.05);
+}
+
+.primaryButton,
+.secondaryButton {
+  border-radius: 25px !important;
+  height: 1.8rem !important; /* 调整按钮高度 */
+  font-size: 0.45rem !important; /* 调整按钮字体大小 */
 }
 
 .primaryButton {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
   border: none !important;
-  border-radius: 50px !important;
-  height: 2.8rem !important;
   font-weight: 600 !important;
-  box-shadow: 0 4px 10px rgba(118, 75, 162, 0.3) !important;
+  box-shadow: 0 2px 5px rgba(118, 75, 162, 0.3) !important;
 }
 
 .secondaryButton {
-  border-radius: 50px !important;
-  height: 2.8rem !important;
   font-weight: 500 !important;
   border-color: #667eea !important;
   color: #667eea !important;
@@ -397,66 +403,19 @@
 
 /* 底部间距 */
 .bottomSpacer {
-  height: 1rem;
+  height: 0.5rem;
 }
 
-/* 响应式设计 */
+/* 响应式设计 (继承大部分调整，可按需微调) */
 @media (max-width: 480px) {
-  .header {
-    padding: 0.7rem 0.7rem 1rem;
-  }
-  
-  .title {
-    font-size: 1.1rem;
-  }
-  
-  .searchInput {
-    padding: 0.6rem 0.9rem 0.6rem 2.6rem;
-    font-size: 0.85rem;
-  }
-  
-  .avatar {
-    width: 2.8rem;
-    height: 2.8rem;
-  }
-  
-  .chatName {
-    font-size: 0.95rem;
-    max-width: 8rem;
-  }
-  
-  .lastMessage {
-    font-size: 0.85rem;
-  }
-  
-  .notificationCard {
-    padding: 1rem;
-  }
-  
-  .notificationHeader {
-    gap: 0.8rem;
-  }
-  
-  .notificationIcon {
-    width: 2.2rem;
-    height: 2.2rem;
-    font-size: 1.1rem;
-  }
-  
-  .notificationTitle {
-    font-size: 0.95rem;
-  }
-  
-  .notificationDesc {
-    font-size: 0.85rem;
-  }
+  /* 在此可为特定小屏幕添加覆盖样式，但当前调整已基本适配 */
 }
 
 /* 动画效果 */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(5px);
   }
   to {
     opacity: 1;
@@ -464,30 +423,24 @@
   }
 }
 
-.chatItem {
+.chatItem,
+.notificationCard {
   animation: fadeIn 0.4s ease-out;
 }
 
 .chatItem:nth-child(2) {
   animation-delay: 0.05s;
 }
-
 .chatItem:nth-child(3) {
   animation-delay: 0.1s;
 }
-
 .chatItem:nth-child(4) {
   animation-delay: 0.15s;
-}
-
-.notificationCard {
-  animation: fadeIn 0.4s ease-out;
 }
 
 .notificationCard:nth-child(2) {
   animation-delay: 0.05s;
 }
-
 .notificationCard:nth-child(3) {
   animation-delay: 0.1s;
 }

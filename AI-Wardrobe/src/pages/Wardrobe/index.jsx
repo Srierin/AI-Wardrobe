@@ -318,7 +318,7 @@ const Wardrobe = () => {
       color: 'cream',
       brand: 'Massimo Dutti',
       season: 'autumn',
-      image: 'https://img01-gms.17zwd.com/imgextra/63071936/i2/0d9392eb-ecb0-43d3-9bb0-6ce24e9dd256.jpeg', // 米白色针织半身裙
+      image: 'https://t14.baidu.com/it/u=3811206566,777595842&fm=224&app=112&f=JPEG?w=500&h=500', // 米白色针织半身裙
       tags: ['温柔', '通勤'],
       favorite: false,
       wearCount: 13,

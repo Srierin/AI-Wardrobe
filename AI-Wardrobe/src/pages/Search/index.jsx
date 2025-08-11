@@ -12,19 +12,19 @@ const SearchPage = () => {
 
   // 热门穿搭推荐数据
   const popularOutfits = [
-    { id: 1, title: '夏日清爽穿搭', tags: ['休闲', '简约'] },
-    { id: 2, title: '职场通勤套装', tags: ['职场', '气质'] },
-    { id: 3, title: '约会甜美连衣裙', tags: ['甜美', '约会'] },
-    { id: 4, title: '运动健身装备', tags: ['运动', '舒适'] },
-    { id: 5, title: '复古港风搭配', tags: ['复古', '港风'] },
-    { id: 6, title: '度假海滩风', tags: ['度假', '沙滩'] },
+    { id: 1, title: '夏日清爽穿搭', tags: ['休闲', '简约'] ,image:'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fci.xiaohongshu.com%2F0db7eb0a-0903-3419-95c3-c8aa41be5b85%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fci.xiaohongshu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1757480618&t=7eefda43fb5d88ac65b4f8070d2bfa59'},
+    { id: 2, title: '职场通勤套装', tags: ['职场', '气质'],image:'https://q9.itc.cn/images01/20250427/1be1d92e69ec4533b027070c0c75c44f.jpeg' },
+    { id: 3, title: '约会甜美连衣裙', tags: ['甜美', '约会'] ,image:'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fcbu01.alicdn.com%2Fimg%2Fibank%2FO1CN01ipfjgk1hpooxJUIl1_%21%212211636834327-0-cib.jpg&refer=http%3A%2F%2Fcbu01.alicdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1757480979&t=581785adfa002840dce411da3bae4293'},
+    { id: 4, title: '运动健身装备', tags: ['运动', '舒适'] ,image:'https://img0.baidu.com/it/u=512672810,2426572922&fm=253&app=138&f=JPEG?w=800&h=1320'},
+    { id: 5, title: '复古港风搭配', tags: ['复古', '港风'] ,image:'https://img2.baidu.com/it/u=115330807,2824891834&fm=253&app=138&f=JPEG?w=800&h=1200'},
+    { id: 6, title: '度假海滩风', tags: ['度假', '沙滩'] ,image:'https://img01-gms.17zwd.com/imgextra/61600777/i2/c73b613b-30ef-4e37-a04c-5d55991fe531.jpeg'},
   ];
 
   // 处理搜索提交
   const handleSearch = () => {
     if (searchValue.trim()) {
       addSearchHistory(searchValue.trim());
-      // navigate(`/search-results?q=${encodeURIComponent(searchValue.trim())}`);
+      navigate(`/text?q=${encodeURIComponent(searchValue.trim())}`);
     }
   };
 
@@ -32,7 +32,7 @@ const SearchPage = () => {
   const handleClickSearch = (keyword) => {
     setSearchValue(keyword);
     addSearchHistory(keyword);
-    navigate(`/search-results?q=${encodeURIComponent(keyword)}`);
+    navigate(`/text?q=${encodeURIComponent(keyword)}`);
   };
 
   return (
@@ -108,7 +108,9 @@ const SearchPage = () => {
                 className={styles.popularCard}
                 onClick={() => handleClickSearch(outfit.title)}
               >
-                <div className={styles.popularImagePlaceholder}></div>
+                <div className={styles.popularImagePlaceholder}>
+                  <img src={outfit.image}/>
+                </div>
                 <h4 className={styles.popularTitle}>{outfit.title}</h4>
                 <div className={styles.popularTags}>
                   {outfit.tags.map((tag, index) => (

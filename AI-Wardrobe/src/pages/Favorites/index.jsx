@@ -1,3 +1,4 @@
+// index.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './favorites.module.css';
@@ -12,42 +13,51 @@ import {
 
 const Favorites = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const [isEditing, setIsEditing] = useState(false);
+  const [selectedItems, setSelectedItems] = useState([]);
   const navigate = useNavigate();
 
   // 收藏的穿搭数据
   const outfitData = [
     {
       id: 1,
-      title: '春日清新搭配',
-      style: '清新甜美',
-      occasion: '日常出街',
-      image: 'https://via.placeholder.com/200x300/FFB6C1/white?text=春日搭配',
+      title: "夏日清爽休闲风",
+      style: "休闲 | 简约",
+      tags: ["日常", "夏季", "简约"],
       likes: 128,
-      tags: ['春装', '清新', '甜美'],
-      price: '¥299',
-      saved: true
+      image: "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFzaGlvbiUyMHN0eWxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
     },
     {
       id: 2,
-      title: '职场优雅套装',
-      style: '商务正装',
-      occasion: '工作场合',
-      image: 'https://via.placeholder.com/200x300/4682B4/white?text=职场装',
-      likes: 256,
-      tags: ['职场', '正装', '优雅'],
-      price: '¥599',
-      saved: true
+      title: "商务通勤正装搭配",
+      style: "正式 | 商务",
+      tags: ["工作", "正式"],
+      likes: 96,
+      image: "https://images.unsplash.com/photo-1534030347209-467a5b0ad3e6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZmFzaGlvbiUyMHN0eWxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
     },
     {
       id: 3,
-      title: '周末休闲风',
-      style: '休闲舒适',
-      occasion: '休闲娱乐',
-      image: 'https://via.placeholder.com/200x300/98FB98/white?text=休闲装',
-      likes: 89,
-      tags: ['休闲', '舒适', '周末'],
-      price: '¥199',
-      saved: true
+      title: "约会甜美连衣裙",
+      style: "甜美 | 约会",
+      tags: ["约会", "甜美", "夏季"],
+      likes: 215,
+      image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhc2hpb24lMjBzdHlsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      id: 4,
+      title: "秋冬温暖针织套装",
+      style: "保暖 | 舒适",
+      tags: ["秋冬", "日常", "舒适"],
+      likes: 178,
+      image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGZhc2hpb24lMjBzdHlsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      id: 5,
+      title: "海边度假风搭配",
+      style: "度假 | 休闲",
+      tags: ["度假", "休闲", "夏季"],
+      likes: 189,
+      image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGZhc2hpb24lMjBzdHlsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
     }
   ];
 
@@ -55,112 +65,131 @@ const Favorites = () => {
   const itemData = [
     {
       id: 1,
-      name: '针织开衫',
-      brand: '优衣库',
-      image: 'https://via.placeholder.com/150x150/DDA0DD/white?text=开衫',
-      price: '¥199',
-      originalPrice: '¥299',
-      category: '上装'
+      name: "简约纯棉白衬衫",
+      brand: "ZARA",
+      price: "¥299",
+      image: "https://images.unsplash.com/photo-1598032895397-b9472444bf93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c2hpcnR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
     },
     {
       id: 2,
-      name: '高腰牛仔裤',
-      brand: 'ZARA',
-      image: 'https://via.placeholder.com/150x150/87CEEB/white?text=牛仔裤',
-      price: '¥299',
-      originalPrice: '¥399',
-      category: '下装'
+      name: "高腰牛仔阔腿裤",
+      brand: "UNIQLO",
+      price: "¥399",
+      image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8amVhbnN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
     },
     {
       id: 3,
-      name: '小白鞋',
-      brand: 'Adidas',
-      image: 'https://via.placeholder.com/150x150/F0E68C/white?text=小白鞋',
-      price: '¥599',
-      originalPrice: '¥799',
-      category: '鞋履'
+      name: "复古小方包",
+      brand: "COACH",
+      price: "¥1299",
+      image: "https://images.unsplash.com/photo-1591561954555-607968c989ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFnfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
     },
     {
       id: 4,
-      name: '链条包',
-      brand: 'Coach',
-      image: 'https://via.placeholder.com/150x150/FFA07A/white?text=链条包',
-      price: '¥1299',
-      originalPrice: '¥1599',
-      category: '配饰'
+      name: "皮质小白鞋",
+      brand: "ADIDAS",
+      price: "¥599",
+      image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      id: 5,
+      name: "简约金属腕表",
+      brand: "DW",
+      price: "¥899",
+      image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2F0Y2h8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
+    },
+    {
+      id: 6,
+      name: "羊毛混纺大衣",
+      brand: "Massimo Dutti",
+      price: "¥1599",
+      image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y29hdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
     }
   ];
 
+  const toggleSelection = (id, type) => {
+    const itemId = `${type}-${id}`;
+    setSelectedItems(prev => 
+      prev.includes(itemId) 
+        ? prev.filter(i => i !== itemId) 
+        : [...prev, itemId]
+    );
+  };
+
   const renderOutfitCard = (outfit) => (
-    <div key={outfit.id} className={`${styles.outfitCard} mb-4`}>
-      <div className="relative">
+    <div 
+      key={outfit.id} 
+      className={`${styles.favoriteCard} ${isEditing && selectedItems.includes(`outfit-${outfit.id}`) ? styles.selected : ''}`}
+      onClick={() => isEditing ? toggleSelection(outfit.id, 'outfit') : navigate()}
+    >
+      <div className={styles.favoriteImage}>
         <img
           src={outfit.image}
-          className={styles.outfitImage}
           alt={outfit.title}
+          style={{ objectFit: 'cover', width: '100%', height: '100%' }}
         />
-        <div className="absolute top-3 right-3">
-          <StarO className="text-yellow-500 bg-white bg-opacity-80 rounded-full p-1" />
-        </div>
-        <div className="absolute bottom-3 left-3">
-          <span className={styles.styleTag}>{outfit.style}</span>
+        <div className={styles.favoriteActions}>
+          <button className={`${styles.actionButton} ${styles.like}`}>
+            <LikeO fontSize={12} />
+          </button>
+          <button className={`${styles.actionButton} ${styles.share}`}>
+            <ShareO fontSize={12} />
+          </button>
+          <button className={`${styles.actionButton} ${styles.delete}`}>
+            <DeleteO fontSize={12} />
+          </button>
         </div>
       </div>
 
-      <div className={styles.outfitContent}>
-        <h3 className={styles.outfitTitle}>{outfit.title}</h3>
-        <p className={styles.outfitOccasion}>适合场合：{outfit.occasion}</p>
-
-        <div className={styles.outfitTags}>
+      <div className={styles.favoriteInfo}>
+        <h3 className={styles.favoriteTitle}>{outfit.title}</h3>
+        <p className={styles.favoriteStyle}>{outfit.style}</p>
+        
+        <div className={styles.favoriteTags}>
           {outfit.tags.map((tag, index) => (
-            <span key={index} className={styles.tag}>#{tag}</span>
+            <span key={index} className={`${styles.favoriteTag} ${
+              tag === '日常' ? styles.daily : 
+              tag === '工作' ? styles.work : 
+              tag === '约会' ? styles.date : 
+              styles.casual
+            }`}>
+              #{tag}
+            </span>
           ))}
         </div>
 
-        <div className={styles.outfitFooter}>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-1">
-              <LikeO className="text-gray-500 text-sm" />
-              <span className="text-sm text-gray-600">{outfit.likes}</span>
-            </div>
-            <span className={styles.price}>{outfit.price}</span>
+        <div className={styles.favoriteStats}>
+          <div className={styles.statItem}>
+            <LikeO className={styles.statIcon} />
+            <span>{outfit.likes}</span>
           </div>
-          <div className="flex space-x-2">
-            <button className={styles.shareButton}>
-              <ShareO className="text-gray-500" />
-            </button>
-            <button className={styles.deleteButton}>
-              <DeleteO className="text-gray-500" />
-            </button>
-          </div>
+          <span className={styles.favoriteDate}>2023.04.15</span>
         </div>
       </div>
     </div>
   );
 
   const renderItemCard = (item) => (
-    <div key={item.id} className={styles.itemCard}>
-      <div className="relative">
+    <div 
+      key={item.id} 
+      className={`${styles.itemCard} ${isEditing && selectedItems.includes(`item-${item.id}`) ? styles.selected : ''}`}
+      onClick={() => isEditing ? toggleSelection(item.id, 'item') : navigate()}
+    >
+      <div className={styles.itemImage}>
         <img
           src={item.image}
-          className={styles.itemImage}
           alt={item.name}
+          style={{ objectFit: 'cover', width: '100%', height: '100%' }}
         />
-        <div className="absolute top-2 left-2">
-          <span className={styles.categoryTag}>{item.category}</span>
-        </div>
       </div>
 
-      <div className={styles.itemContent}>
+      <div className={styles.itemInfo}>
         <h4 className={styles.itemName}>{item.name}</h4>
         <p className={styles.itemBrand}>{item.brand}</p>
-        <div className={styles.itemFooter}>
-          <div>
-            <span className={styles.itemPrice}>{item.price}</span>
-            <span className={styles.originalPrice}>{item.originalPrice}</span>
-          </div>
+        <div className={styles.favoriteStats}>
+          <span className={styles.itemPrice}>{item.price}</span>
           <button className={styles.shopButton}>
-            <ShopO className="text-gray-500 text-sm" />
+            <ShopO fontSize={12} />
           </button>
         </div>
       </div>
@@ -168,16 +197,22 @@ const Favorites = () => {
   );
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${isEditing ? styles.selectMode : ''}`}>
       {/* 顶部标题栏 */}
       <div className={styles.header}>
         <div className={styles.headerTop}>
-          <button className={styles.backButton} onClick={() => navigate('/home')}>
-            <ArrowLeft size={20} />
+          <button className={styles.backButton} onClick={() => navigate(-1)}>
+            <ArrowLeft fontSize={20} />
           </button>
           <h1 className={styles.title}>我的收藏</h1>
-          <button className={styles.editButton}>
-            管理
+          <button 
+            className={styles.editButton}
+            onClick={() => {
+              setIsEditing(!isEditing);
+              if (isEditing) setSelectedItems([]);
+            }}
+          >
+            {isEditing ? '完成' : '管理'}
           </button>
         </div>
       </div>
@@ -206,15 +241,21 @@ const Favorites = () => {
           // 搭配方案
           <div>
             {outfitData.length > 0 ? (
-              <div className={styles.outfitList}>
+              <div className={styles.favoritesGrid}>
                 {outfitData.map(renderOutfitCard)}
               </div>
             ) : (
               <div className={styles.emptyState}>
                 <div className={styles.emptyIcon}>
-                  <StarO className="text-gray-300" size={48} />
+                  <StarO fontSize={60} />
                 </div>
                 <p className={styles.emptyText}>还没有收藏的搭配方案</p>
+                <button 
+                  className={styles.emptyButton}
+                  onClick={() => navigate('/explore')}
+                >
+                  去发现
+                </button>
               </div>
             )}
           </div>
@@ -222,36 +263,43 @@ const Favorites = () => {
           // 单品收藏
           <div>
             {itemData.length > 0 ? (
-              <div className={styles.itemGrid}>
-                {itemData.map((item) => (
-                  <div key={item.id} className={styles.itemGridItem}>
-                    {renderItemCard(item)}
-                  </div>
-                ))}
+              <div className={styles.itemsGrid}>
+                {itemData.map(renderItemCard)}
               </div>
             ) : (
               <div className={styles.emptyState}>
                 <div className={styles.emptyIcon}>
-                  <StarO className="text-gray-300" size={48} />
+                  <StarO fontSize={60} />
                 </div>
                 <p className={styles.emptyText}>还没有收藏的单品</p>
+                <button 
+                  className={styles.emptyButton}
+                  onClick={() => navigate('/shop')}
+                >
+                  去逛逛
+                </button>
               </div>
             )}
           </div>
         )}
       </div>
 
-      {/* 底部操作 */}
-      <div className={styles.actionButtonsContainer}>
-        <div className={styles.actionButtons}>
-          <button className={styles.primaryButton}>
-            发现更多搭配
-          </button>
-          <button className={styles.secondaryButton}>
-            分享我的收藏
-          </button>
+      {/* 批量操作栏 */}
+      {isEditing && selectedItems.length > 0 && (
+        <div className={`${styles.batchActions} ${styles.show}`}>
+          <div className={styles.selectedCount}>
+            已选择 {selectedItems.length} 项
+          </div>
+          <div className={styles.batchButtons}>
+            <button className={`${styles.batchButton} ${styles.share}`}>
+              分享
+            </button>
+            <button className={`${styles.batchButton} ${styles.delete}`}>
+              删除
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

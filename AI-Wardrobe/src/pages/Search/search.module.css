@@ -138,9 +138,20 @@
 
 .popularImagePlaceholder {
   width: 100%;
-  height: 120px;
+  height: 120px; /* 固定高度 */
   background-color: #e0e0e0;
   border-radius: 8px 8px 0 0;
+  overflow: hidden; /* 确保图片不超出圆角区域 */
+  display: flex; /* 使用 flex 布局实现完美居中 */
+  align-items: center;
+  justify-content: center;
+}
+
+.popularImagePlaceholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 关键属性：完整显示图片 */
+  object-position: center; /* 图片居中显示 */
 }
 
 .popularTitle {
