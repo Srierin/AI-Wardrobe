@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // API基础配置
 const API_BASE_URL = window.location.hostname !== 'localhost'; // 可根据环境切换
-const isVercel = window.location.hostname.includes('vercel.app');
+const isVercel = window.location.hostname.includes('ai-wardrobe-a716.vercel.app');
 // 创建axios实例
 const apiClient = axios.create({
   baseURL: API_BASE_URL
