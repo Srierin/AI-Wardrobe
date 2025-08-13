@@ -1,6 +1,6 @@
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { HomeO, Search, MoreO, UserO, BagO } from '@react-vant/icons';
-import styles from './MainLayout.module.css';
+import styles from './mainlayout.module.css';
 
 const MainLayout = () => {
   const location = useLocation();
