@@ -1,7 +1,9 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './text.module.css';
+import useTitle from "@/hooks/useTitle";
 
 const Text = () => {
+  useTitle('测试中');
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);

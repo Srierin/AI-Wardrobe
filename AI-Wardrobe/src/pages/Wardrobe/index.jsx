@@ -8,7 +8,6 @@ import {
   Popup,
   Field,
   Tag,
-
   Empty,
   Loading,
   SwipeCell,
@@ -32,8 +31,10 @@ import {
 } from '@react-vant/icons';
 import { useNavigate } from 'react-router-dom';
 import styles from './wardrobe.module.css';
+import useTitle from "@/hooks/useTitle";
 
 const Wardrobe = () => {
+  useTitle('衣橱');
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
 
@@ -94,7 +95,7 @@ const Wardrobe = () => {
       color: 'white',
       brand: 'UNIQLO',
       season: 'spring',
-      image: 'https://wx1.sinaimg.cn/mw690/007aLidMgy1i2n4t4igp9j30ku0rsn7i.jpg',
+      image: 'https://image-cdn.poizon.com/app/2025/community/1681771375_byte2156605byte_4716afe051ccf44cc90f7500f88ca2ca_iOS_w1440h1920.jpg',
       tags: ['基础款', '百搭'],
       favorite: false,
       wearCount: 15,
@@ -122,7 +123,7 @@ const Wardrobe = () => {
       color: 'black',
       brand: 'COS',
       season: 'autumn',
-      image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=300&h=520&fit=crop',
+      image: 'https://img2.baidu.com/it/u=1392586132,2758973714&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=1319',
       tags: ['正式', '商务'],
       favorite: false,
       wearCount: 3,
@@ -416,7 +417,7 @@ const Wardrobe = () => {
       color: 'black',
       brand: 'Uniqlo',
       season: 'winter',
-      image: 'https://wx4.sinaimg.cn/mw690/005M7XdTly1hqs85ia3ypj30u01isaby.jpg', // 黑色高领毛衣
+      image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.alicdn.com%2Fi1%2F2201443656164%2FO1CN01amHvDr1vPAFM98du3_%21%210-item_pic.jpg&refer=http%3A%2F%2Fimg.alicdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1757664075&t=0d1c53fad784edb06c1c2e51415ec429', 
       tags: ['基础款', '保暖'],
       favorite: false,
       wearCount: 19,
@@ -807,11 +808,12 @@ const Wardrobe = () => {
         onClose={() => setShowAddItemPopup(false)}
         position="bottom"
         style={{ height: '80%' }}
+        closeable={false} 
       >
         <div className={styles.addItemPopup}>
-          <div className={styles.addItemHeader}>
+          <div className={styles.addItemHeader} >
             <h3>添加衣物</h3>
-            <Cross  onClick={() => setShowAddItemPopup(false)} />
+          
           </div>
 
           <div className={styles.addItemContent}>

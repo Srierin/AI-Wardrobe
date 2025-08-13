@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken';
 import Mock from 'mockjs';
-// JWT密钥 - 生产环境中应该使用环境变量
+
 const JWT_SECRET = '$#@!AI_WARDROBE_SECRET_2025';
 
-// 模拟用户数据
-const MOCK_USERS = {
+// 预置用户数据（硬编码在内存中）
+let MOCK_USERS = {
   admin: {
     id: '001',
     username: 'admin',
@@ -55,54 +55,6 @@ const MOCK_USERS = {
   }
 };
 
-// 模拟收藏数据
-const MOCK_FAVORITES = [
-  {
-    id: 'fav_001',
-    userId: '001',
-    type: 'outfit',
-    itemId: 'outfit_001',
-    title: '春季清新搭配',
-    image: 'https://picsum.photos/300/400?random=1',
-    description: '白色衬衫配牛仔裤，简约而不失时尚',
-    tags: ['简约', '休闲', '春季'],
-    createdAt: '2024-03-01T10:00:00Z'
-  },
-  {
-    id: 'fav_002',
-    userId: '001',
-    type: 'item',
-    itemId: 'item_001',
-    title: '经典白衬衫',
-    image: 'https://picsum.photos/300/400?random=2',
-    description: '百搭经典款白衬衫，职场必备',
-    tags: ['经典', '百搭', '职场'],
-    createdAt: '2024-03-02T14:30:00Z'
-  },
-  {
-    id: 'fav_003',
-    userId: '001',
-    type: 'outfit',
-    itemId: 'outfit_002',
-    title: '商务正装搭配',
-    image: 'https://picsum.photos/300/400?random=3',
-    description: '黑色西装配白衬衫，专业商务形象',
-    tags: ['商务', '正装', '专业'],
-    createdAt: '2024-03-03T09:15:00Z'
-  },
-  {
-    id: 'fav_004',
-    userId: '002',
-    type: 'outfit',
-    itemId: 'outfit_003',
-    title: '甜美约会装',
-    image: 'https://picsum.photos/300/400?random=4',
-    description: '粉色连衣裙配小白鞋，甜美可爱',
-    tags: ['甜美', '约会', '连衣裙'],
-    createdAt: '2024-03-04T16:20:00Z'
-  }
-];
-
 // 生成JWT Token
 const generateToken = (user) => {
   return jwt.sign(
@@ -114,7 +66,7 @@ const generateToken = (user) => {
       }
     },
     JWT_SECRET,
-    { expiresIn: '10000h' } // 24小时过期
+    { expiresIn: '24h' } // 24小时过期
   );
 };
 
@@ -127,30 +79,20 @@ const verifyToken = (token) => {
   }
 };
 
-// // 每页10条数据
-// const getImages = (page, pageSize = 10) => {
-//   return Array.from({ length: pageSize }, (_, i) => ({
-//     // 索引唯一
-//     id: `${page}-${i}`,
-//     height: Mock.Random.integer(300, 600), // 随机生成高度
-//     url: Mock.Random.image('300x400', Mock.Random.color(), '#FFF', 'png'), // 随机生成图片 URL
-//   }))
-// }
+// 初始化收藏数据
+let MOCK_FAVORITES = [];
 
-// Mock API响应
 export default [
   // 登录接口
   {
-    url: '/api/login',
+    url: '/petsPlanet/login',
     method: 'post',
     timeout: 1000,
-    response: (req, res) => {
-      const { username, password } = req.body;
-  
-      // 正确查找用户 - 在 MOCK_USERS 中查找匹配的用户
-      const user = Object.values(MOCK_USERS).find(u => u.username === username);
-  
-      // 用户不存在
+    response: ({ body }) => {
+      
+      const { username, password } = body;
+      const user = MOCK_USERS[username];
+      
       if (!user) {
         return {
           code: 1,
@@ -158,8 +100,7 @@ export default [
           data: null
         };
       }
-  
-      // 密码错误
+      
       if (user.password !== password) {
         return {
           code: 1,
@@ -167,13 +108,10 @@ export default [
           data: null
         };
       }
-  
-      // 生成token
+      
       const token = generateToken(user);
-  
-      // 返回用户信息（不包含密码）
       const { password: _, ...userInfo } = user;
-  
+      
       return {
         code: 0,
         message: '登录成功',
@@ -183,14 +121,27 @@ export default [
     }
   },
 
+  // 注册接口 (保留但不使用)
+  {
+    url: '/petsPlanet/register',
+    method: 'post',
+    timeout: 1000,
+    response: ({ body }) => {
+      return {
+        code: 1,
+        message: '当前系统仅支持预置账号登录',
+        data: null
+      };
+    }
+  },
+
   // 获取用户信息接口
   {
-    url: '/api/user',
+    url: '/petsPlanet/user',
     method: 'get',
-    response: (req, res) => {
+    response: ({ headers }) => {
       try {
-        // 从请求头获取token
-        const authHeader = req.headers.authorization;
+        const authHeader = headers.authorization;
         if (!authHeader) {
           return {
             code: 1,
@@ -201,7 +152,6 @@ export default [
         const token = authHeader.split(' ')[1];
         const decoded = verifyToken(token);
 
-        // 根据token中的用户信息查找完整用户数据
         const user = Object.values(MOCK_USERS).find(u => u.id === decoded.user.id);
 
         if (!user) {
@@ -211,13 +161,11 @@ export default [
           };
         }
 
-        // 返回用户信息（不包含密码）
         const { password: _, ...userInfo } = user;
 
         return {
           code: 0,
           message: '获取成功',
-          password: user.password,
           data: userInfo
         };
       } catch (error) {
@@ -231,11 +179,11 @@ export default [
 
   // 获取用户收藏接口
   {
-    url: '/api/user/favorites',
+    url: '/petsPlanet/user/favorites',
     method: 'get',
-    response: (req, res) => {
+    response: ({ headers }) => {
       try {
-        const authHeader = req.headers.authorization;
+        const authHeader = headers.authorization;
         const token = authHeader?.split(' ')[1];
         const decoded = verifyToken(token);
 
@@ -263,15 +211,15 @@ export default [
 
   // 添加收藏接口
   {
-    url: '/api/user/favorites',
+    url: '/petsPlanet/user/favorites',
     method: 'post',
-    response: (req, res) => {
+    response: ({ headers, body }) => {
       try {
-        const authHeader = req.headers.authorization;
+        const authHeader = headers.authorization;
         const token = authHeader?.split(' ')[1];
         const decoded = verifyToken(token);
 
-        const { type, itemId, title, image, description, tags } = req.body;
+        const { type, itemId, title, image, description, tags } = body;
 
         const newFavorite = {
           id: `fav_${Date.now()}`,
@@ -303,7 +251,7 @@ export default [
 
   // 取消收藏接口
   {
-    url: '/api/user/favorites/:id',
+    url: '/petsPlanet/user/favorites/:id',
     method: 'delete',
     response: (req, res) => {
       try {
@@ -340,7 +288,7 @@ export default [
 
   // 获取用户统计数据接口
   {
-    url: '/api/user/stats',
+    url: '/petsPlanet/user/stats',
     method: 'get',
     response: (req, res) => {
       try {
@@ -348,7 +296,7 @@ export default [
         const token = authHeader?.split(' ')[1];
         const decoded = verifyToken(token);
 
-        const user = Object.values(MOCK_USERS).find(u => u.id === decoded.user.id);
+        const user = Object.values(NEW_USERS).find(u => u.id === decoded.user.id);
 
         return {
           code: 0,
@@ -371,7 +319,7 @@ export default [
 
   // 退出登录接口
   {
-    url: '/api/logout',
+    url: '/petsPlanet/logout',
     method: 'post',
     response: (req, res) => {
       return {
@@ -382,7 +330,7 @@ export default [
   },
 
   {
-    url: '/api/images',
+    url: '/petsPlanet/images',
     method: 'get',
     timeout: 1000,
     response: ({ query }) => {

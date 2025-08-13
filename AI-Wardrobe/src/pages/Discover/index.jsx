@@ -5,6 +5,7 @@ import { Search as SearchIcon } from '@react-vant/icons';
 import Waterfall from '@/components/Waterfall';
 import { useImageStore } from '@/store/useImageStore';
 import { useRef } from 'react';
+import useTitle from "@/hooks/useTitle";
 
 // 随机时尚数据生成器
 const fashionTitles = [
@@ -45,6 +46,7 @@ const avatarColors = [
 ];
 
 const Discover = () => {
+  useTitle('发现');
   const [activeTab, setActiveTab] = useState(0);
   const [searchValue, setSearchValue] = useState('');
   const contentRef = useRef(null);
@@ -89,7 +91,7 @@ const Discover = () => {
       title: fashionTitles[titleIndex],
       content: fashionDescriptions[descIndex],
       author: fashionAuthors[authorIndex],
-      avatar: `https://via.placeholder.com/40x40/${avatarColors[avatarIndex].replace('#', '')}/white?text=${fashionAuthors[authorIndex].charAt(0)}`,
+      avatar: `https://source.unsplash.com/random/40x40/?clothing,fashion,apparel,garment,shirt,dress`,
       likes: 100 + Math.floor(Math.random() * 400),
       comments: 10 + Math.floor(Math.random() * 90),
       views: 1000 + Math.floor(Math.random() * 2000),
@@ -139,7 +141,7 @@ const Discover = () => {
                 alt={item.title} 
                 className={styles.image}
                 style={{ 
-                  height: '100%', 
+                  height: `${item.height * 0.8}px`,
                   width: '100%', 
                   objectFit: 'cover',
                   opacity: 0,

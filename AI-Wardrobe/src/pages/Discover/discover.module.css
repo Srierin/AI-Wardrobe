@@ -137,6 +137,7 @@
   width: 100%;
   position: relative;
   overflow: hidden;
+  aspect-ratio: 4/3; /* 添加固定宽高比 */
 }
 
 .contentImage img {
@@ -152,36 +153,36 @@
 
 .authorInfo {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 12px; /* 上移 */
+  right: 12px; /* 右移 */
   background: rgba(0, 0, 0, 0.7);
   color: white;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 14px;
+  padding: 5px 10px; /* 缩小内边距 */
+  border-radius: 18px; /* 更圆润 */
+  font-size: 12px; /* 字体缩小 */
   z-index: 2;
   backdrop-filter: blur(4px);
 }
 
 .contentInfo {
-  padding: 16px;
+  padding: 14px; /* 缩小内边距 */
   display: flex;
   flex-direction: column;
 }
 
 .contentTitle {
-  font-size: 16px;
+  font-size: 15px; /* 稍微缩小 */
   font-weight: 600;
   color: #333;
-  margin-bottom: 8px;
-  line-height: 1.4;
+  margin-bottom: 6px; /* 减少下边距 */
+  line-height: 1.35; /* 优化行高 */
 }
 
 .contentDesc {
-  font-size: 13px;
+  font-size: 12.5px; /* 稍微缩小 */
   color: #666;
-  line-height: 1.5;
-  margin-bottom: 12px;
+  line-height: 1.45; /* 优化行高 */
+  margin-bottom: 10px; /* 减少下边距 */
   display: -webkit-box;
   line-clamp: 2;
   -webkit-line-clamp: 2;
@@ -189,28 +190,30 @@
   overflow: hidden;
 }
 
+/* 标签容器优化 */
 .contentTags {
   display: flex;
-  gap: 6px;
-  margin-bottom: 12px;
+  gap: 5px; /* 缩小间隙 */
+  margin-bottom: 10px; /* 减少下边距 */
   flex-wrap: wrap;
 }
 
+/* 单个标签优化 */
 .contentTag {
   background-color: #f5f7fa;
   color: #5a6c84;
-  padding: 4px 10px;
-  border-radius: 16px;
-  font-size: 11px;
+  padding: 3px 8px; /* 缩小内边距 */
+  border-radius: 14px; /* 更圆润 */
+  font-size: 10.5px; /* 缩小字体 */
   font-weight: 500;
 }
 
-/* 互动按钮 */
+/* 互动按钮区域优化 */
 .actionBar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 12px;
+  padding-top: 10px; /* 减少上边距 */
   border-top: 1px solid #f0f2f5;
 }
 
@@ -233,13 +236,14 @@
   color: #667eea;
 }
 
+/* 关注按钮优化 */
 .followButton {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
-  padding: 6px 14px;
-  border-radius: 16px;
-  font-size: 13px;
+  padding: 5px 12px; /* 缩小内边距 */
+  border-radius: 14px; /* 更圆润 */
+  font-size: 12.5px; /* 缩小字体 */
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;

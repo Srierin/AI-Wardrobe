@@ -1,5 +1,6 @@
 import styles from './coze.module.css';
 import { useState, useRef } from 'react';
+import useTitle from "@/hooks/useTitle";
 
 // API配置
 const API_CONFIG = {
@@ -9,6 +10,7 @@ const API_CONFIG = {
 };
 
 const Coze = () => {
+  useTitle('AI穿搭生成');
   const patToken = import.meta.env.VITE_PAT_TOKEN;
 
   const [description, setDescription] = useState('');

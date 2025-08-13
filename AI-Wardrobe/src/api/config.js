@@ -1,16 +1,16 @@
 import axios from 'axios';
-import { Toast } from 'react-vant';
 
 // API基础配置
-const API_BASE_URL = 'http://localhost:5173/api'; // 可根据环境切换
-
+const API_BASE_URL = window.location.hostname !== 'localhost'; // 可根据环境切换
+const isVercel = window.location.hostname.includes('vercel.app');
 // 创建axios实例
 const apiClient = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: 10000, // 10秒超时
+  baseURL: API_BASE_URL
+  ? (isVercel ? '' :'/petsPlanet' )
+  : `http://${window.location.hostname}:${window.location.port}/petsPlanet`,
+  timeout: 30000, // 10秒超时
   headers: {
     'Content-Type': 'application/json',
-    // 'Authorization': 'Bearer your-token-here', // 如果需要token
   },
 });
 
@@ -19,11 +19,11 @@ apiClient.interceptors.request.use(
   (config) => {
     // 从localStorage获取token
     const token = localStorage.getItem('token');
-    
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    
+
     // 打印请求信息（开发环境）
     if (process.env.NODE_ENV === 'development') {
       console.log('🚀 API Request:', {
@@ -33,7 +33,7 @@ apiClient.interceptors.request.use(
         headers: config.headers,
       });
     }
-    
+
     return config;
   },
   (error) => {
@@ -53,49 +53,51 @@ apiClient.interceptors.response.use(
         data: response.data,
       });
     }
-    
+
     return response;
   },
   (error) => {
     console.error('❌ Response Error:', error);
-    
+
     // 统一错误处理
     if (error.response) {
       const { status, data } = error.response;
-      
+
+      let errorMessage = '请求失败';
+
       switch (status) {
         case 401:
           // 未授权，清除token并跳转到登录页
           localStorage.removeItem('token');
-          Toast.fail('登录已过期，请重新登录');
-          // 这里可以使用路由跳转到登录页
+          errorMessage = '登录已过期，请重新登录';
           window.location.href = '/login';
           break;
-          
+
         case 403:
-          Toast.fail('没有权限访问该资源');
+          errorMessage = '没有权限访问该资源';
           break;
-          
+
         case 404:
-          Toast.fail('请求的资源不存在');
+          errorMessage = '请求的资源不存在';
           break;
-          
+
         case 500:
-          Toast.fail('服务器内部错误');
+          errorMessage = '服务器内部错误';
           break;
-          
+
         default:
-          Toast.fail(data?.message || '请求失败');
+          errorMessage = data?.message || errorMessage;
       }
+
+      // 直接抛出错误信息，由调用方处理
+      throw new Error(errorMessage);
     } else if (error.request) {
       // 网络错误
-      Toast.fail('网络连接失败，请检查网络');
+      throw new Error('网络连接失败，请检查网络');
     } else {
       // 其他错误
-      Toast.fail('请求配置错误');
+      throw new Error('请求配置错误');
     }
-    
-    return Promise.reject(error);
   }
 );
 
@@ -103,4 +105,4 @@ apiClient.interceptors.response.use(
 export default apiClient;
 
 // 导出API基础URL，供其他地方使用
-export { API_BASE_URL };
+export { API_BASE_URL, isVercel };

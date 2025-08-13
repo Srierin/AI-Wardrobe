@@ -10,8 +10,10 @@ import {
   ShopO,
   ArrowLeft
 } from '@react-vant/icons';
+import useTitle from "@/hooks/useTitle";
 
 const Favorites = () => {
+  useTitle('我的收藏');
   const [activeTab, setActiveTab] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -25,7 +27,7 @@ const Favorites = () => {
       style: "休闲 | 简约",
       tags: ["日常", "夏季", "简约"],
       likes: 128,
-      image: "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFzaGlvbiUyMHN0eWxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
+      image: "https://img2.baidu.com/it/u=3564313,3218161849&fm=253&app=138&f=JPEG?w=800&h=1320"
     },
     {
       id: 2,
@@ -33,7 +35,7 @@ const Favorites = () => {
       style: "正式 | 商务",
       tags: ["工作", "正式"],
       likes: 96,
-      image: "https://images.unsplash.com/photo-1534030347209-467a5b0ad3e6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZmFzaGlvbiUyMHN0eWxlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60"
+      image: "https://img0.baidu.com/it/u=1444781991,1109362904&fm=253&fmt=auto&app=138&f=JPEG?w=750&h=500"
     },
     {
       id: 3,
@@ -41,7 +43,7 @@ const Favorites = () => {
       style: "甜美 | 约会",
       tags: ["约会", "甜美", "夏季"],
       likes: 215,
-      image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhc2hpb24lMjBzdHlsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+      image: "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2F8613d282-c603-4ed6-8ca7-7ac87647a4da%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fsafe-img.xhscdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1757556492&t=d02d5851fec1d5e2f197f4a6ca861ba1"
     },
     {
       id: 4,
@@ -49,7 +51,7 @@ const Favorites = () => {
       style: "保暖 | 舒适",
       tags: ["秋冬", "日常", "舒适"],
       likes: 178,
-      image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGZhc2hpb24lMjBzdHlsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+      image: "https://pic.rmb.bdstatic.com/bjh/240106/events/c9c37dd71cd0a46095153dafbc5b7a348035.jpeg"
     },
     {
       id: 5,
@@ -57,7 +59,7 @@ const Favorites = () => {
       style: "度假 | 休闲",
       tags: ["度假", "休闲", "夏季"],
       likes: 189,
-      image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGZhc2hpb24lMjBzdHlsZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+      image: "https://gips2.baidu.com/it/u=1632808742,1085521527&fm=3074&app=3074&f=JPEG"
     }
   ];
 
@@ -201,7 +203,7 @@ const Favorites = () => {
       {/* 顶部标题栏 */}
       <div className={styles.header}>
         <div className={styles.headerTop}>
-          <button className={styles.backButton} onClick={() => navigate(-1)}>
+          <button className={styles.backButton} onClick={() => navigate('/profile')}>
             <ArrowLeft fontSize={20} />
           </button>
           <h1 className={styles.title}>我的收藏</h1>

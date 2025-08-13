@@ -13,8 +13,10 @@ import {
   GiftO
 } from '@react-vant/icons';
 import styles from './home.module.css';
+import useTitle from "@/hooks/useTitle";
 
 const Home = () => {
+  useTitle('首页');
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
 

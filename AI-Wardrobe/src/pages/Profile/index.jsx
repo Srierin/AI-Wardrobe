@@ -31,8 +31,11 @@ import styles from './profile.module.css';
 import { generateImage } from '@/llm';
 import CustomToast from '@/components/CustomToast'; // 导入自定义Toast
 import CustomDialog from '@/components/CustomDialog'; // 导入自定义Dialog
+import useTitle from "@/hooks/useTitle";
 
 const Profile = () => {
+  useTitle('我的');
+
   const navigate = useNavigate();
   
   const { user, logout, updateAvatar } = useUserStore(); // 添加 updateAvatar 方法
@@ -42,10 +45,10 @@ const Profile = () => {
     slogan: user?.bio || '生活中，你就是你的生活。',
   });
   const [userStats, setUserStats] = useState({
-    outfitsCreated: 0,
-    favoritesCount: 0,
-    followersCount: 0,
-    followingCount: 0
+    outfitsCreated: 7,
+    favoritesCount: 10,
+    followersCount: 11,
+    followingCount: 3
   });
 
   const [showActionSheet, setShowActionSheet] = useState(false);

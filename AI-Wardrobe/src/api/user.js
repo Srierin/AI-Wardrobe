@@ -1,5 +1,6 @@
 import apiClient from './config';
 
+
 /**
  * 用户登录
  * @param {Object} data - 登录数据
@@ -8,17 +9,21 @@ import apiClient from './config';
  * @returns {Promise} 登录结果
  */
 export const doLogin = (data) => {
-  return apiClient.post('/login', data)
+  return apiClient.post('/login', data,{
+    headers: {
+      'Content-Type': 'application/json' // 明确指定 JSON 类型
+    }
+  })
     .then(res => {
-      // 检查业务状态码
       if (res.data.code !== 0) {
-        const error = new Error(res.data.message || '登录失败');
+        const error = new Error(res.data?.message || '登录失败');
         error.response = res;
         throw error;
       }
       return res;
     });
 };
+
 /**
  * 获取用户信息
  * @returns {Promise} 用户信息
@@ -26,6 +31,7 @@ export const doLogin = (data) => {
 export const getUser = () => {
   return apiClient.get('/user');
 };
+
 
 /**
  * 更新用户信息
@@ -44,7 +50,7 @@ export const updateUser = (data) => {
  * @returns {Promise} 修改结果
  */
 export const changePassword = (data) => {
-  return apiClient.post('/user/change-password', data);
+  return apiClient.post('/change-password', data);
 };
 
 /**
@@ -71,7 +77,7 @@ export const refreshToken = () => {
  * @returns {Promise} 收藏列表
  */
 export const getUserFavorites = (params = {}) => {
-  return apiClient.get('/user/favorites', { params });
+  return apiClient.get('/favorites', { params });
 };
 
 /**
@@ -82,7 +88,7 @@ export const getUserFavorites = (params = {}) => {
  * @returns {Promise} 添加结果
  */
 export const addFavorite = (data) => {
-  return apiClient.post('/user/favorites', data);
+  return apiClient.post('/favorites', data);
 };
 
 /**
@@ -91,7 +97,7 @@ export const addFavorite = (data) => {
  * @returns {Promise} 取消结果
  */
 export const removeFavorite = (favoriteId) => {
-  return apiClient.delete(`/user/favorites/${favoriteId}`);
+  return apiClient.delete(`/favorites/${favoriteId}`);
 };
 
 /**
@@ -100,7 +106,7 @@ export const removeFavorite = (favoriteId) => {
  * @returns {Promise} 穿搭历史
  */
 export const getUserOutfitHistory = (params = {}) => {
-  return apiClient.get('/user/outfit-history', { params });
+  return apiClient.get('/outfit-history', { params });
 };
 
 /**
@@ -109,7 +115,7 @@ export const getUserOutfitHistory = (params = {}) => {
  * @returns {Promise} 保存结果
  */
 export const saveOutfit = (data) => {
-  return apiClient.post('/user/outfits', data);
+  return apiClient.post('/outfits', data);
 };
 
 /**
@@ -117,5 +123,5 @@ export const saveOutfit = (data) => {
  * @returns {Promise} 统计数据
  */
 export const getUserStats = () => {
-  return apiClient.get('/user/stats');
+  return apiClient.get('/stats');
 };

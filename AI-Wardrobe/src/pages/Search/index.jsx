@@ -4,8 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { Search, Delete, FireO, ArrowLeft } from '@react-vant/icons';
 import useSearchStore from '@/store/useSearchStore';
 import styles from './search.module.css';
+import useTitle from "@/hooks/useTitle";
 
 const SearchPage = () => {
+  useTitle('搜索');
+
   const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
   const { history, addSearchHistory, removeSearchHistory, clearSearchHistory } = useSearchStore();

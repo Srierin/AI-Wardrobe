@@ -394,3 +394,26 @@
     font-size: 11px;
   }
 }
+
+/* 状态消息样式 */
+.successMessage {
+  padding: 10px 15px;
+  margin: 0 16px 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+  background-color: #f0f9eb;
+  color: #67c23a;
+  border: 1px solid #e1f3d8;
+}
+
+.errorMessage {
+  padding: 10px 15px;
+  margin: 0 16px 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+  background-color: #fef0f0;
+  color: #f56c6c;
+  border: 1px solid #fde2e2;
+}

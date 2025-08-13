@@ -13,8 +13,10 @@ import {
   AddO
 } from '@react-vant/icons';
 import { useNavigate } from'react-router-dom';
+import useTitle from "@/hooks/useTitle";
 
 const Messages = () => {
+  useTitle('消息');
   const [activeTab, setActiveTab] = useState(0);
   const navigate = useNavigate();
   
