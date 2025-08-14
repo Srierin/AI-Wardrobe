@@ -1,17 +1,17 @@
 import axios from 'axios';
 
 // API基础配置
-// src/api/config.js
-const isLocal = window.location.hostname === 'localhost';
-
-const API_BASE_URL = isLocal 
-  ? `http://${window.location.hostname}:${window.location.port}/api` 
-  : '/api';
-
+const API_BASE_URL = window.location.hostname !== 'localhost'; // 可根据环境切换
+const isVercel = window.location.hostname.includes('vercel.app');
+// 创建axios实例
 const apiClient = axios.create({
-  baseURL: API_BASE_URL,
-  timeout: 30000,
-  headers: { 'Content-Type': 'application/json' }
+  baseURL: API_BASE_URL
+  ? (isVercel ? '' :'/petsPlanet' )
+  : `http://${window.location.hostname}:${window.location.port}/petsPlanet`,
+  timeout: 30000, // 10秒超时
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 // 请求拦截器 - 添加token
@@ -105,4 +105,4 @@ apiClient.interceptors.response.use(
 export default apiClient;
 
 // 导出API基础URL，供其他地方使用
-export { API_BASE_URL};
+export { API_BASE_URL, isVercel };

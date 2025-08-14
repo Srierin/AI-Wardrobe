@@ -1,7 +1,7 @@
 import axios from './config'
 
 export const getImages = (page) => {
-  return axios.get('/api/images',{
+  return axios.get('/images',{
     params:{page}
   })
 }
