@@ -1,14 +1,24 @@
 import axios from 'axios';
 
-// API基础配置
-const API_BASE_URL = window.location.hostname !== 'localhost'; // 可根据环境切换
-const isVercel = window.location.hostname.includes('vercel.app');
+// 获取当前环境信息
+const isDevelopment = process.env.NODE_ENV === 'development';
+const isProduction = process.env.NODE_ENV === 'production';
+
+// 动态获取API基础URL
+const getApiBaseUrl = () => {
+  if (typeof window === 'undefined') {
+    // 服务器端渲染环境
+    return '';
+  }
+  
+  // 在Vercel或其他生产环境中，API Routes在同一域名下
+  return `${window.location.protocol}//${window.location.host}/api`;
+};
+
 // 创建axios实例
 const apiClient = axios.create({
-  baseURL: API_BASE_URL
-  ? (isVercel ? '' :'/petsPlanet' )
-  : `http://${window.location.hostname}:${window.location.port}/petsPlanet`,
-  timeout: 30000, // 10秒超时
+  baseURL: getApiBaseUrl(),
+  timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -18,17 +28,18 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
   (config) => {
     // 从localStorage获取token
-    const token = localStorage.getItem('token');
+    const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
 
     // 打印请求信息（开发环境）
-    if (process.env.NODE_ENV === 'development') {
+    if (isDevelopment) {
       console.log('🚀 API Request:', {
         method: config.method?.toUpperCase(),
         url: config.url,
+        fullUrl: config.baseURL + config.url,
         data: config.data,
         headers: config.headers,
       });
@@ -46,7 +57,7 @@ apiClient.interceptors.request.use(
 apiClient.interceptors.response.use(
   (response) => {
     // 打印响应信息（开发环境）
-    if (process.env.NODE_ENV === 'development') {
+    if (isDevelopment) {
       console.log('✅ API Response:', {
         status: response.status,
         url: response.config.url,
@@ -68,9 +79,14 @@ apiClient.interceptors.response.use(
       switch (status) {
         case 401:
           // 未授权，清除token并跳转到登录页
-          localStorage.removeItem('token');
-          errorMessage = '登录已过期，请重新登录';
-          window.location.href = '/login';
+          if (typeof window !== 'undefined') {
+            localStorage.removeItem('token');
+            errorMessage = '登录已过期，请重新登录';
+            // 避免在非浏览器环境中执行
+            if (window.location) {
+              window.location.href = '/login';
+            }
+          }
           break;
 
         case 403:
@@ -104,5 +120,5 @@ apiClient.interceptors.response.use(
 // 导出配置好的axios实例
 export default apiClient;
 
-// 导出API基础URL，供其他地方使用
-export { API_BASE_URL, isVercel };
+// 导出环境信息，供其他地方使用
+export { isDevelopment, isProduction, getApiBaseUrl };

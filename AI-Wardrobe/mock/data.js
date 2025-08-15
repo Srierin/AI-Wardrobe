@@ -85,7 +85,7 @@ let MOCK_FAVORITES = [];
 export default [
   // 登录接口
   {
-    url: '/petsPlanet/login',
+    url: '/api/login',
     method: 'post',
     timeout: 1000,
     response: ({ body }) => {
@@ -123,7 +123,7 @@ export default [
 
   // 注册接口 (保留但不使用)
   {
-    url: '/petsPlanet/register',
+    url: '/api/register',
     method: 'post',
     timeout: 1000,
     response: ({ body }) => {
@@ -137,7 +137,7 @@ export default [
 
   // 获取用户信息接口
   {
-    url: '/petsPlanet/user',
+    url: '/api/user',
     method: 'get',
     response: ({ headers }) => {
       try {
@@ -179,7 +179,7 @@ export default [
 
   // 获取用户收藏接口
   {
-    url: '/petsPlanet/user/favorites',
+    url: '/api/user/favorites',
     method: 'get',
     response: ({ headers }) => {
       try {
@@ -211,7 +211,7 @@ export default [
 
   // 添加收藏接口
   {
-    url: '/petsPlanet/user/favorites',
+    url: '/api/user/favorites',
     method: 'post',
     response: ({ headers, body }) => {
       try {
@@ -251,7 +251,7 @@ export default [
 
   // 取消收藏接口
   {
-    url: '/petsPlanet/user/favorites/:id',
+    url: '/api/user/favorites/:id',
     method: 'delete',
     response: (req, res) => {
       try {
@@ -288,7 +288,7 @@ export default [
 
   // 获取用户统计数据接口
   {
-    url: '/petsPlanet/user/stats',
+    url: '/api/user/stats',
     method: 'get',
     response: (req, res) => {
       try {
@@ -319,7 +319,7 @@ export default [
 
   // 退出登录接口
   {
-    url: '/petsPlanet/logout',
+    url: '/api/logout',
     method: 'post',
     response: (req, res) => {
       return {
@@ -330,7 +330,7 @@ export default [
   },
 
   {
-    url: '/petsPlanet/images',
+    url: '/api/images',
     method: 'get',
     timeout: 1000,
     response: ({ query }) => {

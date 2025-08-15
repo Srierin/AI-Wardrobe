@@ -74,7 +74,7 @@
 .categoryTabs {
   background: white;
   border-bottom: 1px solid #f0f0f0;
-  position: sticky;
+  /* position: sticky; */
   top: 68px;
   z-index: 99;
 }
