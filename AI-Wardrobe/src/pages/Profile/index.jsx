@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect ,useRef} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Cell,
@@ -37,7 +37,8 @@ const Profile = () => {
   useTitle('我的');
 
   const navigate = useNavigate();
-  
+  const fileInputRef = useRef(null); // 用于触发文件选择
+
   const { user, logout, updateAvatar } = useUserStore(); // 添加 updateAvatar 方法
   const [userInfo, setUserInfo] = useState({
     name: user?.nickname || '时尚达人',
@@ -89,6 +90,36 @@ const Profile = () => {
     }
   }, [user]);
 
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // 限制大小：2MB
+    if (file.size > 2 * 1024 * 1024) {
+      setToastMessage('图片大小不能超过 2MB');
+      setShowToast(true);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const imageUrl = reader.result; // data:image/... base64 字符串
+
+      // 更新状态和持久化
+      setUserInfo((prev) => ({ ...prev, avatar: imageUrl }));
+      localStorage.setItem('userAvatar', imageUrl);
+      updateAvatar(imageUrl);
+
+      setToastMessage('头像上传成功！');
+      setShowToast(true);
+    };
+    reader.onerror = () => {
+      setToastMessage('读取图片失败');
+      setShowToast(true);
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleAction = async (e) => {
     if (e.type === 1) {
       // AI 生成头像
@@ -105,7 +136,8 @@ const Profile = () => {
         setShowToast(true);
       }
     } else if (e.type === 2) {
-      // 图片上传
+      // 触发本地上传
+      fileInputRef.current?.click();
     }
   }
 
@@ -218,6 +250,16 @@ const Profile = () => {
         cancelText="取消"
         onCancel={() => setShowActionSheet(false)}
         onSelect={(e) => handleAction(e)}
+      />
+
+
+      <input
+        type="file"
+        accept="image/*"
+        // capture="environment" // 可选：移动端优先调用摄像头
+        ref={fileInputRef}
+        style={{ display: 'none' }}
+        onChange={handleFileChange}
       />
 
       {/* 数据统计 */}
