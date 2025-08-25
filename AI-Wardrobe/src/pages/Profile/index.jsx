@@ -1,4 +1,4 @@
-import { useState, useEffect ,useRef} from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Cell,
@@ -118,6 +118,9 @@ const Profile = () => {
       setShowToast(true);
     };
     reader.readAsDataURL(file);
+    
+    // 重置input值，允许重复选择同一文件
+    e.target.value = null;
   };
 
   const handleAction = async (e) => {
@@ -136,8 +139,10 @@ const Profile = () => {
         setShowToast(true);
       }
     } else if (e.type === 2) {
-      // 触发本地上传
-      fileInputRef.current?.click();
+      // 使用setTimeout确保ActionSheet完全关闭后再触发文件选择
+      setTimeout(() => {
+        fileInputRef.current?.click();
+      }, 300);
     }
   }
 
@@ -252,11 +257,10 @@ const Profile = () => {
         onSelect={(e) => handleAction(e)}
       />
 
-
+      {/* 使用原生input元素处理文件上传 */}
       <input
         type="file"
         accept="image/*"
-        // capture="environment" // 可选：移动端优先调用摄像头
         ref={fileInputRef}
         style={{ display: 'none' }}
         onChange={handleFileChange}
@@ -301,7 +305,6 @@ const Profile = () => {
       {/* 退出登录 */}
       <div className={styles.logoutSection}>
         <button className={styles.logoutButton} onClick={handleLogout}>
-          {/* <Edit size={16} style={{ marginRight: '8px' }} /> */}
           退出登录
         </button>
       </div>
