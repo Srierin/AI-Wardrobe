@@ -417,7 +417,7 @@ const Wardrobe = () => {
       color: 'black',
       brand: 'Uniqlo',
       season: 'winter',
-      image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.alicdn.com%2Fi1%2F2201443656164%2FO1CN01amHvDr1vPAFM98du3_%21%210-item_pic.jpg&refer=http%3A%2F%2Fimg.alicdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1757664075&t=0d1c53fad784edb06c1c2e51415ec429', 
+      image: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.alicdn.com%2Fi1%2F2201443656164%2FO1CN01amHvDr1vPAFM98du3_%21%210-item_pic.jpg&refer=http%3A%2F%2Fimg.alicdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1757664075&t=0d1c53fad784edb06c1c2e51415ec429',
       tags: ['基础款', '保暖'],
       favorite: false,
       wearCount: 19,
@@ -715,12 +715,16 @@ const Wardrobe = () => {
       </div>
 
       {/* 添加方式选择 */}
+      {/* 添加方式选择 */}
       <ActionSheet
         visible={showAddSheet}
         actions={addActions}
         onCancel={() => setShowAddSheet(false)}
         title="添加衣物"
         cancelText="取消"
+        closeOnClickAction
+        closeOnClickOverlay
+        className={styles.customActionSheet}
       />
 
       {/* 筛选弹窗 */}
@@ -808,7 +812,7 @@ const Wardrobe = () => {
         onClose={() => setShowAddItemPopup(false)}
         position="bottom"
         style={{ height: '80%' }}
-        closeable={false} 
+        closeable={false}
       >
         <div className={styles.addItemPopup}>
           <div className={styles.addItemHeader} >
