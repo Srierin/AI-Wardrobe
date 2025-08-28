@@ -813,7 +813,7 @@ const Wardrobe = () => {
         <div className={styles.addItemPopup}>
           <div className={styles.addItemHeader} >
             <h3>添加衣物</h3>
-          
+            <Close onClick={() => setShowAddItemPopup(false)} />
           </div>
 
           <div className={styles.addItemContent}>
