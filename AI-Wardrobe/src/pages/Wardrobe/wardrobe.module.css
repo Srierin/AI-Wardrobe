@@ -119,7 +119,7 @@
   height: 0.7rem;
 }
 
-/* 衣物网格 */
+/* 衣物网格 - 恢复两列布局 */
 .clothingGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -529,6 +529,17 @@
   font-size: 0.3rem;
 }
 
+.uploadError {
+  border: 0.05rem solid #ff6b6b;
+  background-color: #fff4f4;
+}
+
+.uploadTip {
+  font-size: 0.25rem;
+  margin-top: 0.1rem;
+  color: #999;
+}
+
 .formSection {
   background: white;
   border-radius: 0.3rem;
@@ -686,6 +697,16 @@
   .itemTag {
     background: #333;
     color: #ccc;
+  }
+  
+  .uploadPlaceholder {
+    background: #2a2a2a;
+    border-color: #444;
+    color: #999;
+  }
+  
+  .formSection {
+    background: #1e1e1e;
   }
 }
 
